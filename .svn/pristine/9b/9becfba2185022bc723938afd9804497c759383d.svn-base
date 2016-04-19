@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lv_search_result_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/classy_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lv_search_result_bg"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal" >
+
+            <TextView
+                android:id="@+id/tv_silu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="思路研究论著"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_mingyi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_silu"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tv_silu"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="名医研究论著"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_linchuang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_silu"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="临床研究论著"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_zhenjiu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_linchuang"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tv_linchuang"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="针灸研究论著"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_shiyan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_linchuang"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="实验研究论著"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_wenxian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_shiyan"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tv_shiyan"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="文献研究论著"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_huli"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_shiyan"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="护理研究论著"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_yian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_huli"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/tv_huli"
+                android:background="@drawable/shape_classify_search_selector"
+                android:text="医案感染杂谈"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:text="搜索历史"
+            android:textColor="@color/gray"
+            android:textSize="16sp" />
+
+        <ListView
+            android:id="@+id/lv_search_history"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none" >
+        </ListView>
+    </LinearLayout>
+
+</LinearLayout>

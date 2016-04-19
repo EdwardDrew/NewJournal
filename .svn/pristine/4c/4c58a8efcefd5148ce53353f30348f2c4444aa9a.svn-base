@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lv_search_result_bg" >
+
+    <ListView
+        android:id="@+id/lv_qi"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </ListView>
+
+    <Button
+        android:id="@+id/btn_comfirm_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_btn_confirm_change"
+        android:text="确认上传"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_margin="50dp" 
+        android:padding="10dp"/>
+
+</RelativeLayout>

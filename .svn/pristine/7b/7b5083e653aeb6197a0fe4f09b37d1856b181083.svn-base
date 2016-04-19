@@ -1,0 +1,189 @@
+package com.ipbase.widget;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+
+import com.ipbase.R;
+import com.ipbase.adapter.QiAdapter;
+import com.ipbase.adapter.YearAdapter;
+
+/**
+ * * 年月控件类，可简化MainActivity的代码量
+ * 
+ * @author xinyi 2015年10月5日上午
+ * */
+public class YearMonthWidget
+{
+	private Activity mActivity;
+	// 年份listview
+	private MultiListView yearListView;
+	// 期listview
+	private MultiListView qiListView;
+	// 年份adapter
+	private YearAdapter yearAdapter;
+	// 期adapter
+	private QiAdapter qiAdapter;
+
+	private String WEB_PATH;
+	private KJHttp kjh;
+
+	private String mYears[];
+	private String mQikans[][];
+	private int mCurPos;
+
+	public YearMonthWidget( Activity outActivity )
+	{
+		mActivity = outActivity;
+		initWidget();
+		// initWidgetListener();
+	}
+
+	private void initWidget()
+	{
+		yearListView = (MultiListView) mActivity
+				.findViewById( R.id.yearListView );
+		qiListView = (MultiListView) mActivity.findViewById( R.id.qiListView );
+		// yearAdapter = new YearAdapter( mActivity, StaticData.years );
+		// yearListView.setAdapter( yearAdapter );
+
+		LoadJournal();
+	}
+
+	/**
+	 * 二级列表默认选择
+	 */
+	private void LoadJournal()
+	{
+		WEB_PATH = mActivity.getString( R.string.url_base )
+				+ mActivity.getString( R.string.url_journal );
+		kjh = new KJHttp();
+
+		// HttpParams params = new HttpParams();
+		kjh.get( WEB_PATH, new HttpCallBack()
+		{
+			@ Override
+			public void onSuccess( String info )
+			{
+				super.onSuccess( info );
+				try
+				{
+					JSONObject jsonObject = new JSONObject( info );
+					JSONArray jsonArray = jsonObject.getJSONArray( "journals" );
+					int size = jsonArray.length();
+					mYears = new String[size];
+					mQikans = new String[size][1];
+					for ( int i = 0; i < size; i++ )
+					{
+						JSONObject yearObject = jsonArray.getJSONObject( i );
+						mYears[i] = yearObject.getString( "year" ) + "年";
+						mQikans[i][0] = mYears[i]
+								+ yearObject.getString( "month" ) + "月第"
+								+ yearObject.getString( "term" ) + "期";
+					}
+					yearAdapter = new YearAdapter( mActivity, mYears );
+					yearListView.setAdapter( yearAdapter );
+					ViewInject.toast( "获取完毕" );
+					yearAdapter.setSelectedPosition( 0 );
+					yearAdapter.notifyDataSetInvalidated();
+
+					qiAdapter = new QiAdapter( mActivity, mQikans, 0 );
+					qiListView.setAdapter( qiAdapter );
+					initYearListener();
+				}
+				catch ( JSONException e )
+				{
+					e.printStackTrace();
+				}
+			}
+
+			@ Override
+			public void onFailure( int errorNo, String strMsg )
+			{
+				super.onFailure( errorNo, strMsg );
+				ViewInject.toast( "获取期刊失败" );
+			}
+
+			@ Override
+			public void onFinish()
+			{
+				super.onFinish();
+			}
+		} );
+	}
+
+	private void initYearListener()
+	{
+		yearListView.setOnItemClickListener( new OnItemClickListener()
+		{
+			@ Override
+			public void onItemClick( AdapterView< ? > parent, View view,
+					int pos, long id )
+			{
+				mCurPos = pos;
+				yearAdapter.setSelectedPosition( pos );
+				yearAdapter.notifyDataSetInvalidated();
+				qiAdapter = new QiAdapter( mActivity, mQikans, pos );
+				qiListView.setAdapter( qiAdapter );
+				qiListView.setOnItemClickListener( new OnItemClickListener()
+				{
+					@ Override
+					public void onItemClick( AdapterView< ? > parent,
+							View view, int pos, long id )
+					{
+						ViewInject.toast( mQikans[mCurPos][pos] );
+					}
+				} );
+			}
+		} );
+		qiListView.setOnItemClickListener( new OnItemClickListener()
+		{
+			@ Override
+			public void onItemClick( AdapterView< ? > parent, View view,
+					int pos, long id )
+			{
+				ViewInject.toast( mQikans[0][pos] );
+			}
+		} );
+	}
+
+	/**
+	 * @return yearListView
+	 */
+	public MultiListView getYearListView()
+	{
+		return yearListView;
+	}
+
+	/**
+	 * @return qiListView
+	 */
+	public MultiListView getQiListView()
+	{
+		return qiListView;
+	}
+
+	/**
+	 * @return yearAdapter
+	 */
+	public YearAdapter getYearAdapter()
+	{
+		return yearAdapter;
+	}
+
+	/**
+	 * @return qiAdapter
+	 */
+	public QiAdapter getQiAdapter()
+	{
+		return qiAdapter;
+	}
+};

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lv_search_result_bg"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="8" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="中医结合肿瘤学的研究现状与使命"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="作者："
+                    android:textColor="@color/divider"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_writer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="张三"
+                    android:textColor="@color/divider"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_digest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text="【摘要】中医肿瘤学是在中医理论指导下，研究肿瘤病因、病机、预防、治疗的临床学科。用中医中药治疗肿瘤的研究是近年来兴起的。
+
+1959年全国肿瘤会议上提出了“神农丸”治疗恶性肿瘤的观察报告，在此之前仅有个别中医药治疗肿瘤的医案。
+
+60年代一些中医或医学科研机构开始寻找抗癌中草药及复方。
+
+1978年全国第一届中医、中西医结合肿瘤防治研究学术协作会议的召开，使中医药治疗肿瘤的研究进入了新的阶段。
+
+80年代以来，中医学与现代肿瘤学相结合，开始形成具有我国肿瘤防治学特点的临床与基础研究体系。在中医药与手术、中医药与放化疗法、中医药与免疫疗法相结合，以及证型研究、治则治法研究、药物的筛选与实验研究、药效机理研究、肿瘤的预防研究等方面，都取得了很大成绩。在中医、中西医结合防治肿瘤取得丰富经验的基础上，中医治疗肿瘤的研究进一步发展成为系统的理论，并且有一些专著相继问世。如钱伯文的《肿瘤的辨证论冶》、李岩的《肿瘤临证备要》、贾丝的《癌瘤中医防治研究》、杨今祥的《抗癌中草药制剂》、骆和生的《常用抗肿瘤中草药》、郁仁存的《中医肿瘤学》等，均标志着中医肿瘤学正在逐步形成相对独立的临床学科。"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="【关键字】肿瘤学；中西结合；研究现状"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="【中图分类号】R73【文献标识码】A"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="一提起祖国医学接下去就会想到博大精深四个字，然后就是对中医现状有些愤愤然。但是，诸君请静下心来想一下，除了西医们对咱们的偏见之外，我们自个，是不是也出现了两极分化？即一部分人盲目自大，而一部分人意志消沉。
+本人是中西医结合肿瘤专业，为医也算不少年了，静下心来说一下中医学在肿瘤中的地位吧，供诸君提个醒。"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/iv_pinglun"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/pencil" />
+
+                <TextView
+                    android:id="@+id/tv_next_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/tv_next_page"
+                    android:textColor="@color/yellow2"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_back_page"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/tv_back_page"
+                    android:textColor="@color/yellow2"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/divider" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="最新评论"
+                    android:textSize="10sp" />
+            </FrameLayout>
+
+            <ListView
+                android:id="@+id/lv_pinglun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/iv_tijiao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/pinglun" />
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+package com.ipbase.utils;
+
+import java.util.List;
+
+import org.kymjs.kjframe.KJDB;
+
+import android.content.Context;
+
+import com.ipbase.bean.User;
+
+public class UIHelper
+{
+	private static User mUser = null;
+
+	public static void saveUser( Context cxt, User user )
+	{
+		KJDB kjdb = KJDB.create( cxt );
+		kjdb.deleteByWhere( User.class, "" );
+		mUser = user;
+		// kjdb.dropDb();
+		kjdb.save( user );
+	}
+
+	public static User getUser( Context cxt )
+	{
+		if ( mUser != null )
+		{
+			return mUser;
+		}
+		KJDB kjdb = KJDB.create( cxt );
+		List< User > datas = kjdb.findAll( User.class );
+		if ( datas != null && datas.size() > 0 )
+		{
+			mUser = datas.get( 0 );
+		}
+		else
+		{
+			mUser = new User();
+			kjdb.save( mUser );
+		}
+		return mUser;
+	}
+
+	public static void logOut( Context cxt )
+	{
+		KJDB kjdb = KJDB.create();
+		kjdb.delete( mUser );
+		mUser = null;
+	}
+}

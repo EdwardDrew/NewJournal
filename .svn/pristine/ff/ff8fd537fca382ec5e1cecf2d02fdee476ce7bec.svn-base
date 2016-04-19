@@ -1,0 +1,97 @@
+package com.ipbase.adapter;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+
+import com.ipbase.R;
+import com.ipbase.emoji.ChatEmoji;
+
+/**
+ * ClassName: FaceAdapter
+ * 
+ * @Description: 表情填充器
+ * @author xinyi
+ * @date 2016-02-28
+ */
+public class FaceAdapter extends BaseAdapter
+{
+	private ArrayList< ChatEmoji > data;
+	private LayoutInflater inflater;
+	private int size = 0;
+	private Context cxt;
+
+	public FaceAdapter( Context cxt, ArrayList< ChatEmoji > list )
+	{
+		this.data = list;
+		this.size = list.size();
+		this.cxt = cxt;
+		this.inflater = LayoutInflater.from( this.cxt );
+	}
+
+	@ Override
+	public int getCount()
+	{
+		return this.size;
+	}
+
+	@ Override
+	public Object getItem( int pos )
+	{
+		return data.get( pos );
+	}
+
+	@ Override
+	public long getItemId( int pos )
+	{
+		return pos;
+	}
+
+	@ SuppressLint( "InflateParams" )
+	@ Override
+	public View getView( int pos, View convertView, ViewGroup parent )
+	{
+		ChatEmoji emoji = data.get( pos );
+		ViewHolder viewHolder = null;
+		if ( convertView == null )
+		{
+			viewHolder = new ViewHolder();
+			convertView = inflater.inflate( R.layout.every_face, null );
+			viewHolder.iv_face = (ImageView) convertView
+					.findViewById( R.id.item_iv_face );
+			convertView.setTag( viewHolder );
+		}
+		else
+		{
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		if ( emoji.getId() == R.drawable.face_del_icon )
+		{
+			viewHolder.iv_face.setImageResource( emoji.getId() );
+		}
+		else if ( TextUtils.isEmpty( emoji.getCharacter() ) )
+		{
+			viewHolder.iv_face.setImageDrawable( null );
+		}
+		else
+		{
+			viewHolder.iv_face.setTag( emoji );
+			viewHolder.iv_face.setImageResource( emoji.getId() );
+		}
+
+		return convertView;
+	}
+
+	class ViewHolder
+	{
+		public ImageView iv_face;
+	}
+};

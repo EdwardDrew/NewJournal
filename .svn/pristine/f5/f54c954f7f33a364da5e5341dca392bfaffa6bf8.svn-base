@@ -1,0 +1,35 @@
+package com.ipbase.fragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class LookCommentsFragment extends SimpleBackFragment
+{
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return null;
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+	}
+
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+	}
+
+	@ Override
+	protected void widgetClick( View view )
+	{
+		super.widgetClick( view );
+	}
+
+};

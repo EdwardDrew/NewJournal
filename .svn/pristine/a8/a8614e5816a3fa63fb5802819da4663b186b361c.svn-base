@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ipbase.widget.NCMScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/web_sl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <com.ipbase.widget.NcmWebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true" />
+
+        <LinearLayout
+            android:id="@+id/ll_jindutiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top"
+            android:gravity="center_vertical" >
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/gray"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:visibility="gone" >
+            </ProgressBar>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/webView"
+            android:background="#f2f2f2"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/listview_face"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/newgame_reply_layout"
+                android:layout_alignParentTop="true"
+                android:headerDividersEnabled="false"
+                android:overScrollMode="never"
+                android:visibility="visible" >
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/newgame_reply_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical" >
+
+                <include layout="@layout/face_relativelayout" />
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</com.ipbase.widget.NCMScrollView>

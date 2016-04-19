@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_nav" >
+
+    <RelativeLayout
+        android:id="@+id/question_title_bar_container"
+        android:layout_width="fill_parent"
+        android:layout_height="40.0dip"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_nav" >
+
+        <Button
+            android:id="@+id/question_photo_view_nav_btn_back"
+            android:layout_width="60.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="14.0dip"
+            android:background="@drawable/bg_nav_submit_selector"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="重拍"
+            android:textColor="@android:color/white"
+            android:textSize="14.0sp" />
+
+        <Button
+            android:id="@+id/question_photo_view_nav_submit"
+            android:layout_width="60.0dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="14.0dip"
+            android:background="@drawable/bg_nav_submit_selector"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="@string/text_ok"
+            android:textColor="@android:color/white"
+            android:textSize="14.0sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/question_photo_view_rotate_container"
+        android:layout_width="fill_parent"
+        android:layout_height="44.099976dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_nav" >
+
+        <Button
+            android:id="@+id/question_photo_view_turn_left_btn"
+            android:layout_width="32.0dip"
+            android:layout_height="25.0dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="12.599976dip"
+            android:background="@drawable/ic_carmera_turn_left_selector"
+            android:onClick="onClick" />
+
+        <Button
+            android:id="@+id/question_photo_view_turn_right_btn"
+            android:layout_width="32.0dip"
+            android:layout_height="25.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12.599976dip"
+            android:background="@drawable/ic_carmera_turn_right_selector"
+            android:onClick="onClick" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/question_photo_view_turn_right_btn"
+            android:layout_toRightOf="@+id/question_photo_view_turn_left_btn"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="20.0dip"
+                android:layout_height="20.0dip"
+                android:src="@drawable/ic_cut" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="在屏幕滑动进行裁剪"
+                android:textColor="#ffffffff"
+                android:textSize="11.0sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/anser_pic_container"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/question_photo_view_rotate_container"
+        android:layout_below="@+id/question_title_bar_container"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_nav" >
+
+        <com.ipbase.cropper.CropImageView
+            android:id="@+id/question_img"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

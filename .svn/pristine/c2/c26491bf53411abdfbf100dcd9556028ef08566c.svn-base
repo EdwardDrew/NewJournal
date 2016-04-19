@@ -1,0 +1,48 @@
+package com.ipbase.ui;
+
+import org.kymjs.kjframe.KJActivity;
+import org.kymjs.kjframe.ui.BindView;
+
+import android.view.View;
+import android.widget.ImageView;
+
+import com.ipbase.R;
+
+/**
+ * 搜索
+ * 
+ * @author 李先华 2015年8月27日上午9:38:45
+ */
+public class SearchActivity extends KJActivity
+{
+	@ BindView( id = R.id.iv_search, click = true )
+	private ImageView mIvSearch;
+
+	@ Override
+	public void setRootView()
+	{
+		setContentView( R.layout.activity_search );
+	}
+
+	@ Override
+	public void initWidget()
+	{
+		super.initWidget();
+	}
+
+	@ Override
+	public void widgetClick( View v )
+	{
+		switch ( v.getId() )
+		{
+			case R.id.iv_search :
+				showActivity( this, SearchResultActivity.class );
+				break;
+
+			default :
+				break;
+		}
+		super.widgetClick( v );
+	}
+
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/lv_search_result_bg"
+    android:orientation="vertical" >
+
+    <include layout="@layout/residemenu_titlebar" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/weixinbg"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="版面支付成功"
+            android:textColor="@color/divider"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="请等待审核!"
+            android:textColor="@color/divider"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_btn_confirm_change"
+        android:text="点击返回"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>

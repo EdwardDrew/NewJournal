@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#553e36"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingEnd="3dp"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    android:paddingStart="3dp"
+    android:paddingTop="3dp" >
+
+    <Button
+        android:id="@+id/btn_write_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_common_selector"
+        android:text="说点什么..."
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/btn_look_other_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_common_selector"
+        android:text="查看评论"
+        android:textColor="#ffffff" />
+
+</LinearLayout>

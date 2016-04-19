@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xinzhongyi_bg" >
+
+            <Button
+                android:id="@+id/title_bar_left_menu"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/title_bar_left_button" />
+
+            <Button
+                android:id="@+id/title_bar_right_menu"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/icon_search" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:id="@+id/layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</LinearLayout>

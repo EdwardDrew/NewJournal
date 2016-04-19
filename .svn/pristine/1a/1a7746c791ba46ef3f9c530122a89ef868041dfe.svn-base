@@ -1,0 +1,167 @@
+package com.ipbase.broadcastreceiver;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import com.ipbase.AppContext;
+import com.ipbase.R;
+import com.ipbase.bean.FragmentPages;
+import com.ipbase.bean.Notice;
+import com.ipbase.residemenu.ResideMenuItem;
+import com.ipbase.ui.MainActivity;
+import com.ipbase.ui.SimpleBackActivity;
+
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import cn.bmob.push.PushConstants;
+import cn.bmob.v3.listener.SaveListener;
+
+/**
+ * @Description：Push消息通过action=cn.bmob.push.action.MESSAGE的Intent把数据发送给客户端com.ipbase.broadcastreceiver.MyMessageReceiver,消息格式由应用自己决定，PushService只负责把服务器下发的消息以字符串格式透传给客户端。
+ * @author xianhua
+ * @date 2016年3月6日上午10:14:02
+ */
+
+public class MyMessageReceiver extends BroadcastReceiver
+{
+
+	private Notice mNotice;
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void onReceive(Context context, Intent intent)
+	{
+		// 获取推送消息
+		String jsonMessage = intent
+				.getStringExtra(PushConstants.EXTRA_PUSH_MESSAGE_STRING);
+
+		String messageParse = null;
+		try
+		{
+			JSONObject object = new JSONObject(jsonMessage);
+			messageParse = object.getString("alert");
+		}
+		catch (JSONException e)
+		{
+			e.printStackTrace();
+			ViewInject.toast("JSONException " + e.getMessage());
+			return;
+		}
+		Log.i("messageParse", messageParse);
+
+		Log.i("BmobClient", "收到的推送消息：" + messageParse);
+		// Toast.makeText(context, "" + messageParse, Toast.LENGTH_LONG).show();
+		// 发送通知
+		NotificationManager nm = (NotificationManager) context
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+
+		Notification n = new Notification();
+		n.icon = R.drawable.ic_launcher;
+		n.tickerText = "新中医收到消息推送";
+		n.when = System.currentTimeMillis();
+		// n.flags=Notification.FLAG_ONGOING_EVENT;
+
+		PendingIntent pi = PendingIntent.getActivities(context, 0,
+				makeIntentStack(context), PendingIntent.FLAG_UPDATE_CURRENT);
+		n.setLatestEventInfo(context, "新中医通知", messageParse, pi);
+		n.defaults |= Notification.DEFAULT_SOUND;
+		n.flags = Notification.FLAG_AUTO_CANCEL;
+		nm.notify(1, n);
+
+		if (AppContext.getInstance().getUser() != null)
+		{
+			// 更新通知表信息
+			updateNoticeTable(context, messageParse);
+		}
+
+		// 如果ResideMenuItem没初始化，tv_title为null
+		if (ResideMenuItem.tv_title == null)
+		{
+			// 标记显示消息气泡为真，显示气泡
+			ResideMenuItem.mBadgeViewState = true;
+		}
+		else
+		{
+			// 显示消息气泡
+			ResideMenuItem.showBadgeView();
+		}
+
+	}
+
+	/**
+	 * @Title: updateNoticeTable
+	 * @Description: 更新通知表信息
+	 * @param context
+	 * @param messageParse
+	 * @return void
+	 * @throws
+	 * @auhor xianhua
+	 * @date 2016年3月16日
+	 */
+	private void updateNoticeTable(Context context, String messageParse)
+	{
+
+		mNotice = new Notice();
+		mNotice.setPhone(AppContext.getInstance().getUser().getPhone());
+		mNotice.setNoticeContent(messageParse);
+		mNotice.save(context, new SaveListener()
+		{
+
+			@Override
+			public void onSuccess()
+			{
+				/*
+				 * ViewInject.toast("通知表添加数据成功，返回objectId为：" +
+				 * mNotice.getObjectId() + ",数据在服务端的创建时间为：" +
+				 * mNotice.getCreatedAt());
+				 */
+			}
+
+			@Override
+			public void onFailure(int code, String msg)
+			{
+				ViewInject.toast("通知表添加数据失败，错误码为：" + code + ",错误信息：" + msg);
+			}
+		});
+	}
+
+	/**
+	 * @Title: makeIntentStack
+	 * @Description: 实现点击Notification跳转到SimpleBackActivity后，点击退出返回MainActivity
+	 * @param context
+	 * @return
+	 * @return Intent[]
+	 * @throws
+	 * @auhor xianhua
+	 * @date 2016年3月6日
+	 */
+	private Intent[] makeIntentStack(Context context)
+	{
+		Intent i = new Intent(context, SimpleBackActivity.class);
+
+		// Bundle bundle = new Bundle();
+		// bundle.putString("messageParse", messageParse);
+		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		i.addFlags(Intent.FILL_IN_DATA);
+		// i.putExtras(bundle);
+		i.putExtra(SimpleBackActivity.CONTENT_KEY,
+				FragmentPages.Notice_Page.getValue());
+		// i.putExtra(SimpleBackActivity.DATA_KEY, bundle);
+		i.setAction(String.valueOf(System.currentTimeMillis()));
+
+		Intent[] intents = new Intent[2];
+
+		intents[0] = Intent.makeRestartActivityTask(new ComponentName(context,
+				MainActivity.class));
+		intents[1] = i;
+		return intents;
+	}
+
+}

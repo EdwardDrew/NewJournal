@@ -1,0 +1,245 @@
+package com.ipbase.fragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import com.ipbase.AppContext;
+import com.ipbase.R;
+import com.ipbase.adapter.CatalogAdapter;
+import com.ipbase.adapter.CatalogAdapter.CatalogItem;
+import com.ipbase.bean.FragmentPages;
+import com.ipbase.bean.User;
+import com.ipbase.ui.SimpleBackActivity;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+/**
+ * ClassName: ArticleListFragment
+ * 
+ * @Description: 某年某月某期的期刊列表页面
+ * @author xinyi
+ * @date 2016-02-20
+ */
+public class ArticleListFragment extends SimpleBackFragment
+{
+	// 某年的期刊 url
+	private String WEB_PATH_Journal;
+	// 用户是否购买改年期刊 url
+	private String WEB_PATH_IfPay;
+	private KJHttp kjh;
+
+	// 期刊 ID
+	private String mJournalId;
+	// 自定义列表适配器
+	private CatalogAdapter adapter;
+
+	@ BindView( id = R.id.lv_contents )
+	private ListView mCatalogLv;
+
+	@ Override
+	protected View inflaterView( LayoutInflater inflater, ViewGroup viewGroup,
+			Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_contents, null );
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+
+		/* 获取数据，数据初始化 */
+		Bundle bundle = getArguments();
+		if ( bundle != null )
+		{
+			String temp = bundle.getString( "JournalID" );
+			if ( temp != null && !temp.equals( "" ) )
+				mJournalId = temp;
+			else
+				mJournalId = "";
+			temp = bundle.getString( "JournalName" );
+			if ( temp != null && !temp.equals( "" ) )
+				setTitle( temp );
+			else
+				setTitle( "未知期刊" );
+		}
+		else
+		{
+			mJournalId = "";
+			setTitle( "未知期刊" );
+		}
+		WEB_PATH_Journal = getString( R.string.url_base )
+				+ getString( R.string.url_article ) + "/journal_id/"
+				+ mJournalId;
+		WEB_PATH_IfPay = getString( R.string.url_base ) + "/payments?user_id=";
+		kjh = new KJHttp();
+	}
+
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+
+		kjh.get( WEB_PATH_Journal, new HttpCallBack()
+		{
+			public void onSuccess( String info )
+			{
+				super.onSuccess( info );
+				getJournalCatalog( info );
+			};
+
+			public void onFailure( int errorNo, String strMsg )
+			{
+			};
+		} );
+	}
+
+	/**
+	 * @Description getJournalCatalog 初始化该年该月该期期刊的文章列表
+	 * 
+	 * @param info
+	 *            服务器后台返回的 json 数据(String)
+	 * @return void
+	 */
+	private void getJournalCatalog( String info )
+	{
+		JSONObject jsonObject;
+		try
+		{
+			// Log.e( "xinyiTag", info );
+			jsonObject = new JSONObject( info );
+			JSONArray articleDir_jsonArray = jsonObject
+					.getJSONArray( "articles" );
+			int size = articleDir_jsonArray.length();
+			CatalogItem items[] = new CatalogItem[size];
+
+			for ( int i = 0; i < size; i++ )
+			{
+				// articleDir为获取到的该月该期的文章目录
+				JSONObject articleDir = new JSONObject(
+						articleDir_jsonArray.getString( i ) );
+
+				// 某篇文章的其它信息
+				String title = articleDir.getString( "title" );
+				String author = articleDir.getString( "author" );
+				String digest = articleDir.getString( "digest" );
+				String article_id = articleDir.getString( "id" );
+
+				items[i] = new CatalogItem( title, author, digest, article_id );
+			}
+
+			adapter = new CatalogAdapter( outsideAty, items );
+			mCatalogLv.setAdapter( adapter );
+
+			initListener();
+		}
+		catch ( JSONException e )
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private void initListener()
+	{
+		mCatalogLv.setOnItemClickListener( new OnItemClickListener()
+		{
+			@ Override
+			public void onItemClick( AdapterView< ? > parent, View view,
+					int pos, long id )
+			{
+				checkIfUserLoginOrPay( pos );
+			}
+		} );
+	}
+
+	/**
+	 * @Description checkIfUserLoginOrPay 检查该用户是否对该期刊付费
+	 * 
+	 * @param pos
+	 *            用户点击的 item 位置下标(int)
+	 * @return void
+	 */
+	private void checkIfUserLoginOrPay( int pos )
+	{
+		User user = AppContext.getInstance().getUser();
+		if ( user != null )
+		{
+			// 如果检测不到登录用户
+			if ( user.getId() == null || user.getId().equals( "" ) )
+			{
+				ViewInject.toast( "未知错误，请重新登录再试~" );
+				return;
+			}
+			else
+			{
+				String WEB_PATH = WEB_PATH_IfPay + user.getId()
+						+ "&journal_id=" + mJournalId;
+
+				doCheckIfPay( pos, WEB_PATH );
+			}
+		}
+		else
+		{
+			ViewInject.toast( "请先登录！" );
+		}
+	}
+
+	/**
+	 * @Description doCheckIfPay 访问指定文章的 Html 页面
+	 * 
+	 * @param pos
+	 *            用户点击的 item 位置下标(final int)
+	 * @param WEB_PATH
+	 *            访问改篇文章的 url 地址(String)
+	 * @return void
+	 */
+	private void doCheckIfPay( final int pos, String WEB_PATH )
+	{
+		kjh.get( WEB_PATH, new HttpCallBack()
+		{
+			public void onSuccess( String info )
+			{
+				try
+				{
+					// Log.e( "xinyiTag", info );
+					JSONObject object = new JSONObject( info );
+					boolean result = object.getBoolean( "result" );
+					if ( result )
+					{
+						CatalogItem item = (CatalogItem) adapter.getItem( pos );
+						Bundle bundle = new Bundle();
+						bundle.putString( "ArticleID", item.getArticle_id() );
+						bundle.putString( "AuthorName", item.getAuthor() );
+						bundle.putString( "ArticleTitle", item.getTitle() );
+						SimpleBackActivity.postShowWith( outsideAty,
+								FragmentPages.WebView_Page, bundle );
+					}
+					else
+					{
+						ViewInject.toast( "期刊仅限于您购买后查看" );
+					}
+				}
+				catch ( JSONException e )
+				{
+					e.printStackTrace();
+				}
+			}
+
+			public void onFailure( int errorNo, String strMsg )
+			{
+				ViewInject.toast( "未知错误，请重新登录再试~" );
+			}
+		} );
+	}
+}

@@ -1,0 +1,19 @@
+package com.ipbase.fragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class TouGaoFragment extends SimpleBackFragment
+{
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+
+		return null;
+	}
+
+};

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/lv_search_result_bg"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="浪费的设计费拉升发动机的收费举案说法f卷发快速的法律举案说法军绿色家乐福sd卡" />
+
+    <TextView
+        android:id="@+id/tv_digest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="浪费的设计费拉升发动机的收费举案说法f卷发快速的法律举案说法军绿色家乐福sd卡kjgkljlfajslfjlasd" 
+        android:textColor="@color/gray"/>
+
+</LinearLayout>

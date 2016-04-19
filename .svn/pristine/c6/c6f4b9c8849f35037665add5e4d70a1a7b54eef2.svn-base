@@ -1,0 +1,18 @@
+package com.ipbase;
+
+public class AppConfig
+{
+
+	/*
+	 * public static final String Mob_APPKEY = "adcc518156fe"; public static
+	 * final String Mob_APPSECRET = "ba8d070036d04e24c89307154a42ee04";
+	 */
+	final static public String Mob_APPKEY = "a866a79a9ef4";
+	final static public String Mob_APPSECRET = "fa895b28d40a82ff00a13b83ab1250e1";
+	final static public String Bmob_Key = "b113847e3498048a2785375a302b7de4";
+
+	final static public String saveRoute = "/NewChineseMedcine/";
+	final static public String httpCachePath = saveRoute + "httpCache/"; // 网络缓存路径
+	final static public String imgCachePath = saveRoute + "imageCache/"; // 图片缓存路径
+
+};

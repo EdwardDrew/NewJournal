@@ -1,0 +1,124 @@
+package com.ipbase.utils;
+
+import java.util.List;
+
+import org.kymjs.kjframe.KJDB;
+
+import com.ipbase.AppApplication;
+import com.ipbase.bean.User;
+
+import android.content.Context;
+
+/**
+ * 
+ * ClassName: DataBaseUtils 
+ * @Description: 数据库工具类
+ * @author kesar
+ * @date 2015年9月23日
+ */
+public class DataBaseUtils
+{
+	private KJDB mKjdb;
+	private static DataBaseUtils mDataBaseUtils;
+
+	private DataBaseUtils(){}
+	
+	/**
+	 * 
+	 * @Description: 获取当前数据库工具类实例
+	 * @param @return   
+	 * @return DataBaseUtils  
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public static DataBaseUtils getInstance()
+	{
+		if(mDataBaseUtils==null)
+		{
+			mDataBaseUtils=new DataBaseUtils();
+		}
+		return mDataBaseUtils;
+	}
+	/**
+	 * 
+	 * @Description: 初始化得到kjdb
+	 * @param @param context
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015-9-9
+	 */
+	public void init(Context context)
+	{
+		mKjdb = KJDB.create(context);
+	}
+
+	/**
+	 * 
+	 * @Description: 保存用户
+	 * @param @param user
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public void saveUser(User user)
+	{
+		mKjdb.save(user);
+	}
+
+	/**
+	 * 
+	 * @Description: 从数据库中获取用户信息
+	 * @param @return   
+	 * @return User  
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public User getUser()
+	{
+		List<User> users = mKjdb.findAll(User.class);
+		if (users != null && !users.isEmpty())
+		{
+			return users.get(0);
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @Description: 从本地数据库中删除用户数据
+	 * @param
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public void removeUser(User user)
+	{
+		if (user != null)
+		{
+			mKjdb.delete(user);
+		}
+	}
+	
+	/**
+	 * 
+	 * @Description: 更新用户
+	 * @param @param user   
+	 * @return void  
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public void updateUser(User user)
+	{
+		if (user != null)
+		{
+			mKjdb.update(user);
+		}
+	}
+
+}

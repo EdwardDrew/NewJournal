@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_left_menu"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_horizontal" >
+
+        <CheckBox
+            android:id="@+id/chb_search_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:checked="true"
+            android:text="搜索全部"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_silu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/chb_search_all"
+            android:layout_marginTop="60dp"
+            android:text="思路研究论著"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_mingyi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chb_silu"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/chb_silu"
+            android:text="名医研究论著"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_linchuang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/chb_silu"
+            android:layout_marginTop="50dp"
+            android:text="临床研究论著"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_zhenjiu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chb_linchuang"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/chb_linchuang"
+            android:text="针灸研究论著"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_shiyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/chb_linchuang"
+            android:layout_marginTop="50dp"
+            android:text="实验研究论著"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_wenxian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chb_shiyan"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/chb_shiyan"
+            android:text="文献研究论著"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_huli"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/chb_shiyan"
+            android:layout_marginTop="50dp"
+            android:text="护理研究论著"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/chb_yian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chb_huli"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/chb_huli"
+            android:text="医案感染杂谈"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+</ScrollView>

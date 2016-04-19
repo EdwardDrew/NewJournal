@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.ipbase.widget.NcmWebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:animateLayoutChanges="true" />
+
+        <LinearLayout
+            android:id="@+id/ll_jindutiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="top"
+            android:gravity="center_vertical" >
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/gray"
+                android:progressDrawable="@drawable/progress_bar_drawable"
+                android:visibility="gone" >
+            </ProgressBar>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        layout="@layout/comment_bar" >
+    </include>
+
+</FrameLayout>

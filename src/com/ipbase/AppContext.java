@@ -1,0 +1,145 @@
+package com.ipbase;
+
+import com.ipbase.bean.User;
+import com.ipbase.utils.DataBaseUtils;
+
+/**
+ * 
+ * ClassName: AppContext
+ * 
+ * @Description: app上下文数据
+ * @author kesar
+ * @date 2015年9月23日
+ */
+public class AppContext
+{
+	// 当前的实例
+	private static AppContext mAppContext;
+	// 当前的用户
+	private User mUser;
+
+	/**
+	 * 
+	 * <p>
+	 * 禁止被外部实例化
+	 * </p>
+	 */
+	private AppContext()
+	{
+	}
+
+	/**
+	 * 
+	 * @Description: 获取当前的实例
+	 * @param @return
+	 * @return AppContext
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public static AppContext getInstance()
+	{
+		if (null == mAppContext)
+		{
+			mAppContext = new AppContext();
+		}
+		return mAppContext;
+	}
+
+	/**
+	 * 
+	 * @Description: 获取当前的用户
+	 * @param @return
+	 * @return User
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public User getUser()
+	{
+		if (mUser == null)
+		{
+			mUser = DataBaseUtils.getInstance().getUser();
+		}
+		return mUser;
+	}
+
+	/**
+	 * 
+	 * @Description: 更新用户信息
+	 * @param
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public void updateUser(User user)
+	{
+		if (user != null)
+		{
+			DataBaseUtils.getInstance().updateUser(user);
+		}
+	}
+
+	/**
+	 * 
+	 * @Description: 保存当前用户
+	 * @param @param mUser
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月23日
+	 */
+	public void setUser(User mUser, boolean isSave)
+	{
+		if (mUser != null)
+		{
+			this.mUser = mUser;
+			if (isSave)
+			{
+				User user = DataBaseUtils.getInstance().getUser();
+				if (user != null)
+				{
+					DataBaseUtils.getInstance().removeUser(user);
+				}
+				DataBaseUtils.getInstance().saveUser(mUser);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @Description: 删除当前用户
+	 * @param @param mUser
+	 * @return void
+	 * @throws
+	 * @author xinyi
+	 * @date 2015年9月28日
+	 */
+	public void deleteUser(User toDeleteUser)
+	{
+		if (toDeleteUser != null)
+		{
+			DataBaseUtils.getInstance().removeUser(toDeleteUser);
+		}
+		this.mUser = null;
+	}
+
+	/**
+	 * 
+	 * @Description: 判断用户是否已登陆
+	 * @param @return
+	 * @return boolean
+	 * @throws
+	 * @author xinyi
+	 * @date 2015-9-5
+	 */
+	public boolean isLogin()
+	{
+		if (getUser() != null)
+		{
+			return true;
+		}
+		return false;
+	}
+}

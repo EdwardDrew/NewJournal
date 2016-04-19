@@ -1,0 +1,99 @@
+package com.ipbase.adapter;
+
+import com.ipbase.R;
+
+import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+/**
+ * 首页期设配器
+ * @author 李先华
+ *2015年10月1日下午7:15:53
+ */
+public class QiAdapter extends BaseAdapter {
+
+	Context context;
+	LayoutInflater layoutInflater;
+	String[][] qies;
+	public int foodpoition;
+	
+	//当年的期数
+	public int[] qies2Length = null;
+
+	public QiAdapter(Context context, String[][] qies,int position) {
+		this.context = context;
+		this.qies = qies;
+		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.foodpoition = position;
+//		Log.d("鲜花QiAdapter foodpoition：", foodpoition+"");
+		
+		//计算qies第二为数组数据的个数
+		qies2Length = new int[qies.length];
+		for (int i = 0; i < qies.length; i++) {
+			qies2Length[i] = qies[i].length;
+//			Log.d("鲜花QiAdapter qies2Length["+i+"]", qies2Length[i]+"");
+		}	
+
+	}
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+//		Log.d("鲜花QiAdapter qies2Length：", qies2Length[foodpoition]+"");
+//		return qies.length;
+		return qies2Length[foodpoition];
+	}
+
+	@Override
+	public Object getItem(int position) {
+		// TODO Auto-generated method stub
+//		Log.d("鲜花QiAdapter getItem position ：", position+"");
+		return getItem(position);
+	}
+
+	@Override
+	public long getItemId(int position) {
+		// TODO Auto-generated method stub
+//		Log.d("鲜花QiAdapter getItemId position ：", position+"");
+		return position;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		// TODO Auto-generated method stub
+		ViewHolder viewHolder = null;
+
+//		Log.d("鲜花QiAdapter getView position ：", position+"");
+		final int location=position;
+//		Log.d("鲜花QiAdapter location：", location+"");
+
+
+		if (convertView == null) {
+			convertView = layoutInflater.inflate(R.layout.qi_list_item, null);
+			viewHolder = new ViewHolder();
+			viewHolder.textView = (TextView) convertView
+					.findViewById(R.id.tv_qi);
+			convertView.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+//		Log.d("鲜花QiAdapter qies[foodpoition][position]：", qies[foodpoition][position]);
+		viewHolder.textView.setText(qies[foodpoition][position]);
+
+		viewHolder.textView.setTextColor(Color.BLACK);
+
+		return convertView;
+	}
+
+	public static class ViewHolder {
+		public TextView textView;
+	}
+
+}

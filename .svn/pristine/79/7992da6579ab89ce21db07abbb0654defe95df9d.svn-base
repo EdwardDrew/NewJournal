@@ -1,0 +1,85 @@
+package com.ipbase.adapter;
+
+import java.util.ArrayList;
+import com.ipbase.R;
+import com.ipbase.bean.Comment;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+public class PullAndRefreshAdapter extends BaseAdapter
+{
+	private Activity aty;
+	private ArrayList< Comment > commentLists = null;
+
+	public PullAndRefreshAdapter( Activity activity, ArrayList< Comment > lists )
+	{
+		this.aty = activity;
+		this.commentLists = lists;
+	}
+
+	@ Override
+	public int getCount()
+	{
+		return commentLists == null ? 0 : commentLists.size();
+	}
+
+	@ Override
+	public Object getItem( int pos )
+	{
+		return commentLists == null ? null : commentLists.get( pos );
+	}
+
+	@ Override
+	public long getItemId( int pos )
+	{
+		return pos;
+	}
+
+	public ArrayList< Comment > getCommentLists()
+	{
+		return commentLists == null ? null : commentLists;
+	}
+
+	public void setCommentLists( ArrayList< Comment > lists )
+	{
+		this.commentLists = lists;
+	}
+
+	@ SuppressLint( "InflateParams" )
+	@ Override
+	public View getView( int pos, View convertView, ViewGroup parent )
+	{
+		ViewHolder holder = null;
+
+		if ( null == convertView )
+		{
+			holder = new ViewHolder();
+			LayoutInflater mInflater = LayoutInflater.from( aty );
+			convertView = mInflater.inflate( R.layout.comment_and_reply_item,
+					null );
+
+			holder.tv = (TextView) convertView.findViewById( R.id.reply );
+			convertView.setTag( holder );
+		}
+		else
+		{
+			holder = (ViewHolder) convertView.getTag();
+		}
+
+		Comment comment = commentLists.get( pos );
+		holder.tv.setText( comment.getContent() );
+
+		return convertView;
+	}
+
+	private class ViewHolder
+	{
+		private TextView tv;
+	};
+
+};

@@ -1,0 +1,44 @@
+package com.ipbase.fragment;
+
+import org.kymjs.kjframe.ui.BindView;
+
+import com.ipbase.R;
+import com.ipbase.pulltorefresh.library.PullToRefreshListView;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class LookCommentsFragment extends SimpleBackFragment
+{
+	@ BindView( id = R.id.pull_refresh_list )
+	private PullToRefreshListView refreshListview;
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_look_comments, null );
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+	}
+
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+		setTitle( "所有评论" );
+	}
+
+	@ Override
+	protected void widgetClick( View view )
+	{
+		super.widgetClick( view );
+	}
+
+};

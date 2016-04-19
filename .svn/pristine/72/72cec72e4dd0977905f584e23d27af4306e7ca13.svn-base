@@ -1,0 +1,238 @@
+package com.ipbase.fragment;
+
+import java.util.List;
+
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import c.b.BP;
+import c.b.PListener;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
+
+import com.ipbase.AppConfig;
+import com.ipbase.AppContext;
+import com.ipbase.R;
+import com.ipbase.adapter.YiTouAdapter;
+import com.ipbase.adapter.YiTouAdapter.ArticleData;
+import com.ipbase.bean.UserArticle;
+import com.ipbase.utils.Installer;
+
+public class YiTouGaoFragment extends SimpleBackFragment
+{
+	@ BindView( id = R.id.lv_yitougaojian )
+	private ListView mListView;
+	private YiTouAdapter mAdapter;
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_yitougao, null );
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+		setTitle( "已投稿件" );
+		if ( mListView == null )
+			ViewInject.toast( "绑定失败了" );
+		// Bmob支付初始化
+		BP.init( outsideAty, AppConfig.Bmob_Key );
+		loadYiTouFaoJian();
+	}
+
+	/**
+	 * 获取用户投稿相关信息
+	 * 
+	 * @return void
+	 */
+	private void loadYiTouFaoJian()
+	{
+		BmobQuery< UserArticle > query = new BmobQuery< UserArticle >();
+		query.addWhereEqualTo( "phone", AppContext.getInstance().getUser()
+				.getPhone() );
+		query.findObjects( outsideAty, new FindListener< UserArticle >()
+		{
+			@ Override
+			public void onSuccess( List< UserArticle > user )
+			{
+				setWidget( user );
+			}
+
+			@ Override
+			public void onError( int errNO, String msg )
+			{
+				ViewInject.toast( "错误码:" + errNO + ", 错误原因:" + msg );
+			}
+		} );
+	}
+
+	/**
+	 * 设置已投稿控件查看
+	 * 
+	 * @param user
+	 *            查询到符合条件的所有用户(List< UserArticle >)
+	 * @return void
+	 */
+	private void setWidget( List< UserArticle > user )
+	{
+		int size = user.size();
+		if ( size > 0 )
+		{
+			ArticleData data[] = new ArticleData[size];
+			for ( int i = 0; i < size; i++ )
+			{
+				data[i] = new ArticleData( user.get( i ).getWord(), user
+						.get( i ).getState() );
+			}
+			mAdapter = new YiTouAdapter( outsideAty, data );
+			mListView.setAdapter( mAdapter );
+			mListView.setOnItemClickListener( new OnItemClickListener()
+			{
+				@ Override
+				public void onItemClick( AdapterView< ? > parent, View view,
+						int pos, long id )
+				{
+					ArticleData data = (ArticleData) mAdapter.getItem( pos );
+					int info = data.getArticleStates();
+					if ( 0 == info )
+					{
+						ViewInject.toast( "文章审核中..." );
+					}
+					else if ( 1 == info )
+					{
+						ViewInject.toast( "文章审核未通过，详情请联系期刊中心" );
+					}
+					else if ( 2 == info )
+					{
+						setPayClickWork( parent, view, pos, id );
+					}
+					else if ( 3 == info )
+					{
+						ViewInject.toast( "文章已刊登" );
+					}
+				}
+			} );
+		}
+		else
+		{
+			ViewInject.toast( "亲，您还没有投稿哦~" );
+		}
+	}
+
+	/**
+	 * 设置支付 item 点击事件
+	 * 
+	 * @param parent
+	 *            点击的View的父容器(AdapterView< ? >)
+	 * @param view
+	 *            点击的View(View)
+	 * @param pos
+	 *            点击的View在父容器中的位置下标(int)
+	 * @param Id
+	 *            点击的View在父容器中的位置(long)
+	 * 
+	 * @return void
+	 */
+	private void setPayClickWork( AdapterView< ? > parent, View view,
+			final int pos, long Id )
+	{
+		final ProgressDialog dialog = ViewInject.getprogress( outsideAty,
+				"正在通讯，请稍候...", false );
+
+		ArticleData rowData = (ArticleData) mAdapter.getItem( pos );
+		String goodName = rowData.getBmobFiles().getFilename();
+
+		PListener payListener = new PListener()
+		{
+			// 因为网络等问题,不能确认是否支付成功,请稍后手动查询(小概率事件)
+			@ Override
+			public void unknow()
+			{
+				ViewInject.toast( "支付结果未知,请稍后手动查询" );
+				dialog.dismiss();
+			}
+
+			// 支付成功,保险起见请调用查询方法确认结果
+			@ Override
+			public void succeed()
+			{
+				ViewInject.toast( "支付成功 !" );
+				dialog.dismiss();
+			}
+
+			// 无论支付成功与否,只要成功产生了请求,就返回订单号,请自行保存以便以后查询
+			@ Override
+			public void orderId( String orderId )
+			{
+				// ViewInject.toast( "获取订单成功!请等待跳转到支付页面~" );
+				Log.e( "xinyiTag", "获取订单成功!请等待跳转到支付页面~" );
+			}
+
+			/*
+			 * 支付失败,有可能是用户中断支付,也有可能是网络问题
+			 * 返回10777时说明上次操作尚未完成,拒绝多次请求以免生成多个订单(可用BP.ForceFree()方法强制取消一次限制)
+			 * 支付宝支付时6001为用户主动中断支付操作 微信支付返回-2时为用户主动中断操作,返回-3为未安装Bmob支付插件.apk
+			 * (如果多次出现异常请向Bmob工作人员反馈)
+			 */
+			@ Override
+			public void fail( int code, String reason )
+			{
+				if ( code == -3 )
+				{
+					installWeiXinPay();
+				}
+				else
+				{
+					ViewInject.toast( "支付取消 !" );
+				}
+				dialog.dismiss();
+			}
+		};
+
+		// Bmob支付
+		BP.pay( outsideAty, goodName, "这本文章的表述", 0.01, false, payListener );
+	}
+
+	/**
+	 * 安装微信支付插件
+	 * 
+	 * @return void
+	 */
+	private void installWeiXinPay()
+	{
+		new AlertDialog.Builder( outsideAty )
+				.setMessage( "监测到你尚未安装微信支付插件,是否现在安装？(无需耗费流量)" )
+				.setPositiveButton( "安装", new DialogInterface.OnClickListener()
+				{
+					@ Override
+					public void onClick( DialogInterface dialog, int which )
+					{
+						Installer.loadBmobPayPlugin( outsideAty,
+								"bmob_pay_wx.db" );
+					}
+				} )
+				.setNegativeButton( "取消", new DialogInterface.OnClickListener()
+				{
+					@ Override
+					public void onClick( DialogInterface dialog, int which )
+					{
+						dialog.dismiss();
+					}
+				} ).create().show();
+	}
+};

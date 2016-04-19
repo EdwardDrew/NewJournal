@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lv_search_result_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp" >
+
+        <TextView
+            android:id="@+id/tv_price_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本书价格为"
+            android:textColor="@color/divider"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="11.88"
+            android:textColor="@color/divider"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_yuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="元"
+            android:textColor="@color/divider"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_comfirm_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="确认购买？"
+        android:textColor="@color/divider"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal" >
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/yes"
+            android:text="是 "
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="80dp"
+            android:background="@drawable/no"
+            android:text="否"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</LinearLayout>

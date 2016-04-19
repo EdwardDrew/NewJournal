@@ -1,0 +1,136 @@
+package com.ipbase.fragment;
+
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+import org.kymjs.kjframe.utils.StringUtils;
+
+import com.ipbase.R;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+/**
+ * 
+ * ClassName: FindPasswordFragment
+ * 
+ * @Description: 找回密码
+ * @author kesar
+ * @date 2015-9-3
+ */
+public class FindPasswordFragment extends SimpleBackFragment implements
+		TextWatcher
+{
+	@ BindView( id = R.id.find_pwd_et_password )
+	private EditText mEtPassword;
+	@ BindView( id = R.id.find_pwd_et_repassword )
+	private EditText mEtRePassword;
+	@ BindView( id = R.id.find_pwd_btn_commit, click = true )
+	private Button mBtnCommit;
+
+	@ Override
+	protected View inflaterView( LayoutInflater arg0, ViewGroup arg1,
+			Bundle arg2 )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_find_password, null );
+	}
+
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+		setTitle( "找回密码" );
+		initTextChangedListener();
+	}
+
+	@ Override
+	protected void widgetClick( View v )
+	{
+		super.widgetClick( v );
+		switch ( v.getId() )
+		{
+			case R.id.find_pwd_btn_commit :
+				doCommit();
+				break;
+		}
+	}
+
+	/**
+	 * 
+	 * @Description: 初始化EditText的监听器
+	 * @param
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015-9-3
+	 */
+	private void initTextChangedListener()
+	{
+		mEtPassword.addTextChangedListener( this );
+		mEtRePassword.addTextChangedListener( this );
+	}
+
+	/**
+	 * 
+	 * @Description: 提交操作
+	 * @param
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015-9-3
+	 */
+	private void doCommit()
+	{
+		String password = mEtPassword.getText().toString().trim();
+		String repassword = mEtRePassword.getText().toString().trim();
+		if ( StringUtils.isEmpty( password ) )
+		{
+			ViewInject.toast( "密码不能为空" );
+			return;
+		}
+		if ( StringUtils.isEmpty( repassword ) )
+		{
+			ViewInject.toast( "确认密码不能为空" );
+			return;
+		}
+		if ( !password.equals( repassword ) )
+		{
+			ViewInject.toast( "两次输入的密码不一致" );
+			return;
+		}
+		ViewInject.toast( "密码修改成功" );
+		onBackClick();
+	}
+
+	@ Override
+	public void beforeTextChanged( CharSequence s, int start, int count,
+			int after )
+	{
+	}
+
+	@ Override
+	public void onTextChanged( CharSequence s, int start, int before, int count )
+	{
+	}
+
+	@ Override
+	public void afterTextChanged( Editable s )
+	{
+		String password = mEtPassword.getText().toString().trim();
+		String repassword = mEtRePassword.getText().toString().trim();
+		if ( StringUtils.isEmpty( password )
+				|| StringUtils.isEmpty( repassword ) )
+		{
+			mBtnCommit.setEnabled( false );
+		}
+		else
+		{
+			mBtnCommit.setEnabled( true );
+		}
+	}
+}

@@ -1,0 +1,18 @@
+package com.ipbase;
+
+public class AppConfig
+{
+
+	/*
+	 * public static final String Mob_APPKEY = "adcc518156fe"; public static
+	 * final String Mob_APPSECRET = "ba8d070036d04e24c89307154a42ee04";
+	 */
+	public static final String Mob_APPKEY = "a866a79a9ef4";
+	public static final String Mob_APPSECRET = "fa895b28d40a82ff00a13b83ab1250e1";
+	public static final String Bmob_Key = "b113847e3498048a2785375a302b7de4";
+
+	public static final String saveFolder = "ncm";
+	public static final String httpCachePath = saveFolder + "/httpCache"; // 网络缓存路径
+	public static final String imgCachePath = saveFolder + "/imageCache"; // 图片缓存路径
+
+};

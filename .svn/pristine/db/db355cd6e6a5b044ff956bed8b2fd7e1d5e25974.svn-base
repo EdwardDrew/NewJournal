@@ -1,0 +1,128 @@
+package com.ipbase.ui;
+
+import org.kymjs.kjframe.KJActivity;
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+
+import com.ipbase.AppApplication;
+import com.ipbase.AppContext;
+import com.ipbase.R;
+import com.ipbase.bean.FragmentPages;
+import com.ipbase.residemenu.SlidingMenu;
+import com.ipbase.widget.YearMonthWidget;
+
+/**
+ * @author 李先华 2015年8月26日下午5:48:21
+ * @author xinyi 2015年9月5日上午
+ */
+public class MainActivity extends KJActivity
+{
+	// 自定义侧滑菜单控件
+	private SlidingMenu mSlidingMenu;
+	// 点击 Back 键间隔时间
+	private long mExitTime;
+	// 搜索按钮
+	@ BindView( id = R.id.title_bar_right_menu, click = true )
+	private Button mSearchButton;
+	// 年月期刊控件
+	@ SuppressWarnings( "unused" )
+	private YearMonthWidget mYearMonthWidget;
+
+	@ Override
+	public void setRootView()
+	{
+		setContentView( R.layout.activity_main );
+	}
+
+	@ Override
+	public void initData()
+	{
+		super.initData();
+		AppApplication.getInstance().setMainActivity( this );
+	}
+
+	@ Override
+	public void initWidget()
+	{
+		super.initWidget();
+		mSlidingMenu = new SlidingMenu( this,
+				(Button) findViewById( R.id.title_bar_left_menu ) );
+		if ( AppContext.getInstance().getUser() != null )
+		{
+			ViewInject.toast( AppContext.getInstance().getUser().getPhone()
+					+ "登录成功" );
+		}
+		mYearMonthWidget = new YearMonthWidget( this );
+	}
+
+	@ Override
+	public void widgetClick( View view )
+	{
+		switch ( view.getId() )
+		{
+			case R.id.title_bar_right_menu :
+				SimpleBackActivity.postShowWith( this,
+						FragmentPages.Search_Page );
+				break;
+
+			default :
+				break;
+		}
+		super.widgetClick( view );
+	}
+
+	@ Override
+	public boolean dispatchTouchEvent( MotionEvent ev )
+	{
+		return mSlidingMenu.getResideMenu().dispatchTouchEvent( ev );
+	}
+
+	public boolean onKeyDown( int keyCode, KeyEvent event )
+	{
+		if ( keyCode == KeyEvent.KEYCODE_BACK )
+		{
+			// 判断菜单是否关闭
+			if ( mSlidingMenu.getIsClosed() )
+			{
+				// 判断两次点击的时间间隔（默认设置为2秒）
+				if ( ( System.currentTimeMillis() - mExitTime ) > 2000 )
+				{
+					ViewInject.toast( "再按一次退出程序" );
+					mExitTime = System.currentTimeMillis();
+				}
+				else
+				{
+					finish();
+					System.exit( 0 );
+					super.onBackPressed();
+				}
+			}
+			else
+			{
+				mSlidingMenu.getResideMenu().closeMenu();
+			}
+			return true;
+		}
+		return super.onKeyDown( keyCode, event );
+	}
+
+	/**
+	 * 
+	 * @Description: 刷新主界面
+	 * @param
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月26日
+	 */
+	public void reFresh()
+	{
+		// 刷新菜单
+		mSlidingMenu.reFresh();
+	}
+}

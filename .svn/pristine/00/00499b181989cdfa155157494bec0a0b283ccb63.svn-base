@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/xinzhongyi_bg" 
+            android:clickable="true">
+
+            <Button
+                android:id="@+id/title_bar_left_menu"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/title_bar_left_button" />
+
+            <Button
+                android:id="@+id/title_bar_right_menu"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/icon_search" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:id="@+id/layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@color/lv_search_result_bg"
+        android:orientation="horizontal" >
+
+        <com.ipbase.widget.MultiListView
+            android:id="@+id/yearListView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:choiceMode="singleChoice"
+            android:divider="@drawable/list_item_divider"
+            android:listSelector="#00000000"
+            android:scrollbars="none" >
+        </com.ipbase.widget.MultiListView>
+
+        <com.ipbase.widget.MultiListView
+            android:id="@+id/qiListView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:choiceMode="singleChoice"
+            android:divider="@drawable/list_item_divider"
+            android:listSelector="#00000000"
+            android:scrollbars="none" >
+        </com.ipbase.widget.MultiListView>
+    </LinearLayout>
+
+</LinearLayout>

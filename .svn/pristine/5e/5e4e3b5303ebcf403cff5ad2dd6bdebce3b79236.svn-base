@@ -1,0 +1,147 @@
+package com.ipbase.fragment;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings.RenderPriority;
+import android.webkit.WebView;
+import android.widget.ProgressBar;
+
+import com.ipbase.R;
+import com.ipbase.widget.NcmWebViewClient;
+
+public class ScanArticleFragment extends SimpleBackFragment
+{
+	private String WEB_PATH_Journal;
+	private String WEB_PATH_Article;
+	private KJHttp kjh;
+
+	private String mJournalID;
+	private String mArticleIDs[];
+	@ BindView( id = R.id.webView )
+	private WebView webView;
+	@ BindView( id = R.id.progress )
+	private ProgressBar mProgressBar;
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_webview, null );
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+		Bundle bundle = getArguments();
+		if ( bundle != null )
+		{
+			mJournalID = bundle.getString( "ArticleID" );
+		}
+		else
+		{
+			mJournalID = "";
+		}
+		// 网络连接相关
+		WEB_PATH_Journal = getString( R.string.url_base )
+				+ getString( R.string.url_article ) + "/journal_id/"
+				+ mJournalID;
+		WEB_PATH_Article = getString( R.string.url_base )
+				.replace( "/rest", "/" )
+				+ getString( R.string.url_article )
+				+ "/show/";
+		kjh = new KJHttp();
+	}
+
+	@ SuppressWarnings( "deprecation" )
+	@ SuppressLint( "SetJavaScriptEnabled" )
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+		setTitle( "作者—文章标题" );
+		webView.getSettings().setJavaScriptEnabled( true );
+		webView.getSettings().setBuiltInZoomControls( true );
+		webView.getSettings().setUseWideViewPort( true );
+		webView.getSettings().setRenderPriority( RenderPriority.HIGH );
+		// webView.getSettings().setBlockNetworkImage(true);
+		webView.loadData( "", "text/html", "utf-8" );
+		// webView.setInitialScale(39);
+		webView.setWebViewClient( new NcmWebViewClient( mProgressBar ) );
+		webView.setWebChromeClient( new WebChromeClient()
+		{
+			@ Override
+			public void onProgressChanged( WebView view, int newProgress )
+			{
+				mProgressBar.setProgress( newProgress );
+			}
+		} );
+		init();
+	}
+
+	private void init()
+	{
+		// webView.loadUrl( WEB_PATH );
+		kjh.get( WEB_PATH_Journal, new HttpCallBack()
+		{
+			public void onSuccess( String info )
+			{
+				super.onSuccess( info );
+				JSONObject jsonObject;
+				try
+				{
+					jsonObject = new JSONObject( info );
+					JSONArray articleDir_jsonArray = jsonObject
+							.getJSONArray( "articles" );
+					int size = articleDir_jsonArray.length();
+					mArticleIDs = new String[size];
+					// ViewInject.toast( info );
+					// Log.e( "xinyiTag", info );
+					for ( int i = 0; i < size; i++ )
+					{
+						// articleDir为获取到的该月改期的文章目录
+						JSONObject articleDir = new JSONObject(
+								articleDir_jsonArray.getString( i ) );
+
+						// 某篇文章的其它信息
+						String title = articleDir.getString( "title" );
+						String author = articleDir.getString( "author" );
+						// String content = articleDir.getString( "content" );
+						String article_id = articleDir.getString( "id" );
+						mArticleIDs[i] = article_id;
+
+						setTitle( author + "—" + title );
+					}
+					if ( mArticleIDs != null && mArticleIDs.length > 0
+							&& !mArticleIDs[0].equals( "" ) )
+					{
+						webView.loadUrl( WEB_PATH_Article + mArticleIDs[0] );
+						//webView.loadUrl( "http://dnf.qq.com" );
+					}
+				}
+				catch ( JSONException e )
+				{
+					e.printStackTrace();
+				}
+			};
+
+			public void onFailure( int errorNo, String strMsg )
+			{
+
+			};
+		} );
+	}
+};

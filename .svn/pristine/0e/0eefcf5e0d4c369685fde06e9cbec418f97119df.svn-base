@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/layout_info"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_top_bar" >
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_toRightOf="@+id/iv_back"
+                android:background="@drawable/shape_search"
+                android:gravity="bottom"
+                android:hint="搜索..."
+                android:paddingBottom="10dp"
+                android:paddingLeft="46dp"
+                android:paddingRight="46dp"
+                android:paddingTop="10dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_alignBottom="@id/et_search"
+                android:layout_alignRight="@id/et_search"
+                android:layout_margin="8dp"
+                android:src="@drawable/icon_search2" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_search_article"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/btn_search_selector"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="搜文章"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_search_writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/btn_search_selector"
+                android:padding="5dp"
+                android:text="搜作者"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/classy_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/layout_left_menu"
+        android:orientation="vertical" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/layout_left_menu"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_horizontal" >
+
+                <CheckBox
+                    android:id="@+id/chb_search_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:checked="true"
+                    android:text="搜索全部"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_silu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/chb_search_all"
+                    android:layout_marginTop="60dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="思路研究论著"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_mingyi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/chb_silu"
+                    android:layout_marginLeft="25dp"
+                    android:layout_toRightOf="@+id/chb_silu"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="名医研究论著"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_linchuang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/chb_silu"
+                    android:layout_marginTop="50dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="临床研究论著"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_zhenjiu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/chb_linchuang"
+                    android:layout_marginLeft="25dp"
+                    android:layout_toRightOf="@+id/chb_linchuang"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="针灸研究论著"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_shiyan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/chb_linchuang"
+                    android:layout_marginTop="50dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="实验研究论著"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_wenxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/chb_shiyan"
+                    android:layout_marginLeft="25dp"
+                    android:layout_toRightOf="@+id/chb_shiyan"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="文献研究论著"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_huli"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/chb_shiyan"
+                    android:layout_marginTop="50dp"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="护理研究论著"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/chb_yian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/chb_huli"
+                    android:layout_marginLeft="25dp"
+                    android:layout_toRightOf="@+id/chb_huli"
+                    android:button="@drawable/checkbox_selector"
+                    android:text="医案感染杂谈"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </ScrollView>
+    </FrameLayout>
+
+</LinearLayout>

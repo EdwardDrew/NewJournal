@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/menu_info_selector"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="20dp" >
+
+    <com.ipbase.widget.CircleImage
+        android:id="@+id/image_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon_man_white" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="8"
+            android:text="用户昵称"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_userinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="个性签名"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+</LinearLayout>

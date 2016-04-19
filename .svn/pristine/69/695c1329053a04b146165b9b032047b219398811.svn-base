@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.ipbase.widget.NcmWebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:animateLayoutChanges="true" />
+
+    <LinearLayout
+        android:id="@+id/ll_jindutiao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top"
+        android:gravity="center_vertical" >
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@color/gray"
+            android:progressDrawable="@drawable/progress_bar_drawable"
+            android:visibility="gone" >
+        </ProgressBar>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_webview_coment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/lv_search_result_bg"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingEnd="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:weightSum="5" >
+
+        <EditText
+            android:id="@+id/et_coment_content"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/sharp_edit_feedback"
+            android:hint="请输入您的反馈意见"
+            android:padding="10dp"
+            android:singleLine="false"
+            android:textSize="16.0sp" />
+
+        <Button
+            android:id="@+id/btn_commit_coment"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:background="@drawable/btn_common_selector"
+            android:gravity="center"
+            android:text="@string/btn_name_coment"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/default_textSize" />
+    </LinearLayout>
+
+</RelativeLayout>

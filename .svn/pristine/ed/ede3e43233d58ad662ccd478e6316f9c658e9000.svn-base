@@ -1,0 +1,127 @@
+package com.ipbase.thread;
+
+import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.http.HttpParams;
+
+import com.alibaba.fastjson.JSON;
+import com.ipbase.adapter.PullAndRefreshAdapter;
+import com.ipbase.bean.Comment;
+import com.ipbase.pulltorefresh.library.PullToRefreshListView;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+public class LoadCommentsTask extends
+		AsyncTask< PullAndRefreshAdapter, Void, String >
+{
+	private KJHttp kjh;
+	private String WEB_PATH;
+	private String articleID;
+	private String httpInfo;
+	private PullToRefreshListView listView;
+	private PullAndRefreshAdapter adapter;
+
+	public LoadCommentsTask( KJHttp kjh, String url, String articleID,
+			PullToRefreshListView listView )
+	{
+		this.kjh = kjh;
+		this.WEB_PATH = url;
+		this.articleID = articleID;
+		this.listView = listView;
+	}
+
+	@ Override
+	protected void onPreExecute()
+	{
+		super.onPreExecute();
+	}
+
+	@ Override
+	protected String doInBackground( PullAndRefreshAdapter... params )
+	{
+		this.adapter = params[0];
+
+		HttpParams httpParams = new HttpParams();
+		Comment comment = new Comment();
+		comment.setComment_id( articleID );
+		httpParams.putJsonParams( JSON.toJSONString( comment ) );
+
+		kjh.get( WEB_PATH, httpParams, false, new HttpCallBack()
+		{
+			public void onSuccess( String info )
+			{
+				httpInfo = info;
+				Log.e( "xinyiTag", info );
+			};
+
+			public void onFailure( int errorNo, String strMsg )
+			{
+				Log.e( "xinyiTag 获取文章评论失败", "错误码：" + errorNo + " ,错误信息："
+						+ strMsg );
+			};
+
+			public void onFinish()
+			{
+			};
+		} );		
+		
+		while ( true )
+		{
+			if ( httpInfo != null && !httpInfo.equals( "" ) )
+			{
+				return httpInfo;
+			}
+		}
+	}
+
+	@ Override
+	protected void onProgressUpdate( Void... values )
+	{
+		super.onProgressUpdate( values );
+	}
+
+	@ Override
+	protected void onPostExecute( String info )
+	{
+		ArrayList< Comment > commentLists = new ArrayList< Comment >();
+
+		try
+		{
+			JSONObject jsonObject = new JSONObject( info );
+			JSONArray jsonArray = jsonObject.getJSONArray( "comments" );
+
+			int size = jsonArray.length();
+			for ( int i = 0; i < size; i++ )
+			{
+				Comment comment = new Comment();
+				JSONObject jsonComment = jsonArray.getJSONObject( i );
+
+				comment.setId( jsonComment.getString( "id" ) );
+				comment.setUser_id( jsonComment.getString( "user_id" ) );
+				comment.setComment_id( jsonComment.getString( "comment_id" ) );
+				comment.setContent( jsonComment.getString( "content" ) );
+				comment.setType( jsonComment.getInt( "type" ) );
+				comment.setCreatetime( jsonComment.getString( "createtime" ) );
+
+				commentLists.add( comment );
+			}
+
+			adapter.setCommentLists( commentLists );
+			adapter.notifyDataSetChanged();
+
+			listView.onRefreshComplete();
+			super.onPostExecute( info );
+		}
+		catch ( JSONException e )
+		{
+			e.printStackTrace();
+		}
+	}
+
+};

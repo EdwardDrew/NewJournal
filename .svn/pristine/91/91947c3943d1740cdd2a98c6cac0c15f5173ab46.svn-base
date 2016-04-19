@@ -1,0 +1,93 @@
+package com.ipbase.adapter;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import com.ipbase.R;
+
+public class SlideListAdapter extends BaseAdapter
+{
+	final static public String mListContent[] = { "更改密码", "已收藏", "已购买", "投稿",
+			"已投稿件", "通知", "版本更新", "意见反馈", "注销", "测试1", "测试2", "测试3", "测试4" };
+
+	final static public int mListIcon[] = { R.drawable.icon_lock,
+			R.drawable.icon_heart, R.drawable.icon_cart, R.drawable.icon_mail,
+			R.drawable.icon_checklist, R.drawable.icon_chat,
+			R.drawable.icon_thunder, R.drawable.icon_send,
+			R.drawable.icon_logout, R.drawable.icon_logout,
+			R.drawable.icon_logout, R.drawable.icon_logout,
+			R.drawable.icon_logout };
+
+	private Activity mActivity;
+
+	public SlideListAdapter( Activity outsideActivity )
+	{
+		mActivity = outsideActivity;
+	}
+
+	@ Override
+	public int getCount()
+	{
+		return mListContent.length;
+	}
+
+	@ Override
+	public Object getItem( int pos )
+	{
+		return mListContent[pos];
+	}
+
+	@ Override
+	public long getItemId( int pos )
+	{
+		return pos;
+	}
+
+	@ SuppressLint( "InflateParams" )
+	@ Override
+	public View getView( int pos, View convertView, ViewGroup parent )
+	{
+		ViewHolder viewHolder = null;
+
+		if ( null == convertView )
+		{
+			viewHolder = new ViewHolder();
+			LayoutInflater mInflater = LayoutInflater.from( mActivity );
+			convertView = mInflater.inflate( R.layout.residemenu_item, null );
+
+			viewHolder.mInfo = (TextView) convertView
+					.findViewById( R.id.tv_title );
+			viewHolder.mIcon = (ImageView) convertView
+					.findViewById( R.id.iv_icon );
+
+			convertView.setTag( viewHolder );
+		}
+		else
+		{
+			viewHolder = (ViewHolder) convertView.getTag();
+		}
+
+		// set item values to the viewHolder:
+
+		String itemName = (String) getItem( pos );
+		if ( null != itemName && !itemName.equals( "" ) )
+		{
+			viewHolder.mInfo.setText( itemName );
+			viewHolder.mIcon.setImageResource( mListIcon[pos] );
+		}
+
+		return convertView;
+	}
+
+	private static class ViewHolder
+	{
+		public ImageView mIcon;
+		public TextView mInfo;
+	};
+
+};

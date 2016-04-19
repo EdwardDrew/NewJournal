@@ -1,0 +1,96 @@
+package com.ipbase.widget;
+
+import org.kymjs.kjframe.ui.ViewInject;
+
+import com.ipbase.R;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MyDialog extends Dialog
+{
+	private String mInfo;
+	private Button mOKButton;
+	private TextView mTips;
+	private boolean mFlag;
+	private EditText mEdittext;
+	private onClickOKButtonListener mListener;
+
+	public interface onClickOKButtonListener
+	{
+		public void back( String returnInfo );
+	}
+
+	@ Override
+	protected void onCreate( Bundle savedInstanceState )
+	{
+		super.onCreate( savedInstanceState );
+		setContentView( R.layout.edittext_dialog );
+
+		init();
+	}
+
+	public MyDialog( Context cxt, String titleString, String info,
+			Boolean flag, onClickOKButtonListener listener )
+	{
+		super( cxt );
+		setTitle( titleString );
+		mInfo = info;
+		mFlag = flag;
+		mListener = listener;
+	}
+
+	private void init()
+	{
+		mTips = (TextView) findViewById( R.id.tips_edit );
+		if ( mFlag )
+		{
+			mTips.setText( "请输入昵称" );
+		}
+		else
+		{
+			mTips.setText( "请输入邮箱" );
+		}
+		mEdittext = (EditText) findViewById( R.id.nickName_edit );
+		mEdittext.setText( mInfo );
+		mEdittext.setSelectAllOnFocus( true );
+		mOKButton = (Button) findViewById( R.id.nickName_button );
+		mOKButton.setOnClickListener( new View.OnClickListener()
+		{
+			@ Override
+			public void onClick( View v )
+			{
+				String returnInfo = mEdittext.getText().toString();
+				if ( returnInfo == null || returnInfo.trim().equals( "" ) )
+				{
+					if ( mFlag )
+					{
+						ViewInject.toast( "请填写昵称再提交" );
+					}
+					else
+					{
+						ViewInject.toast( "请填写邮箱再提交" );
+					}
+					return;
+				}
+				if ( !mFlag )
+				{
+					if ( !returnInfo.contains( "@" )
+							|| !returnInfo.contains( ".com" ) )
+					{
+						ViewInject.toast( "邮箱格式不正确" );
+						return;
+					}
+				}
+
+				mListener.back( returnInfo );
+				MyDialog.this.dismiss();
+			}
+		} );
+	}
+}

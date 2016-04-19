@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/lv_search_result_bg"
+    android:padding="20dp" >
+
+    <TextView
+        android:id="@+id/tv_contributed_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="文章标题"
+        android:textColor="@color/brown_text"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_contributed_digest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_contributed_title"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="文章内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
+        android:textColor="@color/gray"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_contributed_digest"
+        android:layout_marginTop="10dp"
+        android:text="已投稿"
+        android:textColor="@color/divider"
+        android:textSize="13sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_contributed_digest"
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/tv_state"
+        android:text="状态："
+        android:textColor="@color/divider"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_pay_fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_state"
+        android:layout_marginTop="10dp"
+        android:text="@string/tv_pay_fee"
+        android:textColor="@color/yellow2"
+        android:textSize="12sp" />
+
+</RelativeLayout>

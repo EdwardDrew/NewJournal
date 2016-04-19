@@ -1,0 +1,39 @@
+package com.ipbase.fragment;
+
+import com.ipbase.R;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+public class SearchResultFragment extends SimpleBackFragment
+{
+
+	@ Override
+	protected View inflaterView( LayoutInflater arg0, ViewGroup arg1,
+			Bundle arg2 )
+	{
+		return View.inflate( outsideAty, R.layout.activity_search_result, null );
+	}
+
+	@Override
+	protected void initWidget(View parentView) {
+		// TODO Auto-generated method stub
+		super.initWidget(parentView);
+		setRLVisible(View.GONE);
+		setRLSearchVisible(View.VISIBLE);
+	}
+	
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		super.initData();
+	}
+	
+	@Override
+	protected void widgetClick(View v) {
+		// TODO Auto-generated method stub
+		super.widgetClick(v);
+	}
+};

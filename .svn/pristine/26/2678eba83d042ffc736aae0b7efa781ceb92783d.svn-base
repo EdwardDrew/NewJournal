@@ -1,0 +1,81 @@
+package com.ipbase.fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.FindListener;
+
+import com.ipbase.AppContext;
+import com.ipbase.R;
+import com.ipbase.adapter.YiTouAdapter;
+import com.ipbase.bean.UserArticle;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+
+public class YiTouGaoFragment extends SimpleBackFragment
+{
+	@ BindView( id = R.id.lv_yitougaojian )
+	private ListView mListView;
+	private YiTouAdapter mAdapter;
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_yitougao, null );
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+		setTitle( "已投稿件" );
+		if ( mListView == null )
+			ViewInject.toast( "绑定失败了" );
+		loadYiTouFaoJian();
+	}
+
+	private void loadYiTouFaoJian()
+	{
+		BmobQuery< UserArticle > query = new BmobQuery< UserArticle >();
+		query.addWhereEqualTo( "phone", AppContext.getInstance().getUser()
+				.getPhone() );
+		query.findObjects( getActivity(), new FindListener< UserArticle >()
+		{
+			@ Override
+			public void onSuccess( List< UserArticle > user )
+			{
+				if ( user.size() > 0 )
+				{
+					ArrayList< BmobFile > bmobFiles = new ArrayList< BmobFile >();
+					for ( UserArticle userArticle : user )
+					{
+						bmobFiles.add( userArticle.getWord() );
+					}
+					mAdapter = new YiTouAdapter( getActivity(), bmobFiles );
+					mListView.setAdapter( mAdapter );
+				}
+				else
+				{
+					ViewInject.toast( "亲，您还没有投稿哦~" );
+				}
+			}
+
+			@ Override
+			public void onError( int errNO, String msg )
+			{
+				ViewInject.toast( "错误码:" + errNO + ", 错误原因:" + msg );
+			}
+		} );
+	}
+
+};

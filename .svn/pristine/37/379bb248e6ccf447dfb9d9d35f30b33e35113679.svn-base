@@ -1,0 +1,201 @@
+package com.ipbase.ui;
+
+import java.util.logging.Logger;
+
+import org.kymjs.kjframe.KJActivity;
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+
+import com.ipbase.AppApplication;
+import com.ipbase.AppContext;
+import com.ipbase.R;
+import com.ipbase.adapter.QiAdapter;
+import com.ipbase.adapter.YearAdapter;
+import com.ipbase.bean.FragmentPages;
+import com.ipbase.residemenu.SlidingMenu;
+import com.ipbase.widget.MultiListView;
+
+/**
+ * @author 李先华 2015年8月26日下午5:48:21
+ * @author xinyi 2015年9月5日上午
+ */
+public class MainActivity extends KJActivity
+{
+	// 自定义侧滑菜单控件
+	private SlidingMenu mSlidingMenu;
+	// 点击 Back 键间隔时间
+	private long mExitTime;
+	// 搜索按钮
+	@ BindView( id = R.id.title_bar_right_menu, click = true )
+	private Button mSearchButton;
+
+	//年份listview
+	@BindView(id = R.id.yearListView)
+	private MultiListView yearListView;
+	//期listview
+	@BindView(id = R.id.qiListView)
+	private MultiListView qiListView;
+	//年份adapter
+	private YearAdapter yearAdapter;
+	//期adapter
+	private QiAdapter qiAdapter;
+
+	//第几年第几个月第几期
+	String qies[][] = new String[][] {
+			new String[] {"2015年1月第一期", "2015年1月第二期", "2015年2月第一期", "2015年2月第二期", "2015年3月第一期","2015年4月第一期"},
+			new String[] { "2014年1月第一期", "2014年1月第二期", "2014年2月第一期", "2014年2月第二期", "2014年3月第一期"},
+			new String[] {"2013年1月第一期", "2013年1月第二期", "2013年2月第一期", "2013年2月第二期", "2013年3月第一期"},
+			new String[] {"2012年1月第一期", "2012年1月第二期", "2012年2月第一期", "2012年2月第二期", "2012年3月第一期","2012年4月第一期"},
+	};
+
+	//年份
+	String years[] =new String []{"2015","2014","2013","2012"};
+
+	@ Override
+	public void setRootView()
+	{
+		setContentView( R.layout.activity_main );
+	}
+
+	@ Override
+	public void initData()
+	{
+		super.initData();
+		AppApplication.getInstance().setMainActivity( this );
+	}
+
+	@ Override
+	public void initWidget()
+	{
+		super.initWidget();
+		mSlidingMenu = new SlidingMenu( this,
+				(Button) findViewById( R.id.title_bar_left_menu ) );
+		//		ViewInject.toast(AppContext.getInstance().getUser().toString());
+		if ( AppContext.getInstance().getUser() != null )
+			ViewInject.toast( AppContext.getInstance().getUser().toString() );
+
+		yearAdapter = new YearAdapter(getApplicationContext(), years);
+		yearListView.setAdapter(yearAdapter);
+
+		selectDefult(); //默认选择
+
+		yearListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				// TODO Auto-generated method stub
+				final int location=position;
+				yearAdapter.setSelectedPosition(position);
+				yearAdapter.notifyDataSetInvalidated();
+				qiAdapter=new QiAdapter(getApplicationContext(), qies, position);
+				qiListView.setAdapter(qiAdapter);
+				qiListView.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int position, long arg3) {
+						// TODO Auto-generated method stub
+						Toast.makeText(getApplicationContext(), qies[location][position], Toast.LENGTH_SHORT).show();
+					}
+				});
+			}
+		});
+
+	}
+
+	/**
+	 * 二级列表默认选择
+	 */
+	private void selectDefult(){
+		final int location=0;
+		yearAdapter.setSelectedPosition(0);
+		yearAdapter.notifyDataSetInvalidated();
+		qiAdapter=new QiAdapter(getApplicationContext(), qies, 0);
+		qiListView.setAdapter(qiAdapter);
+		qiListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), qies[location][position], Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	@ Override
+	public void widgetClick( View view )
+	{
+		switch ( view.getId() )
+		{
+		case R.id.title_bar_right_menu :
+			SimpleBackActivity.postShowWith( this,
+					FragmentPages.Search_Page );
+			break;
+
+		default :
+			break;
+		}
+		super.widgetClick( view );
+	}
+
+	@ Override
+	public boolean dispatchTouchEvent( MotionEvent ev )
+	{
+		return mSlidingMenu.getResideMenu().dispatchTouchEvent( ev );
+	}
+
+	public boolean onKeyDown( int keyCode, KeyEvent event )
+	{
+		if ( keyCode == KeyEvent.KEYCODE_BACK )
+		{
+			// 判断菜单是否关闭
+			if ( mSlidingMenu.getIsClosed() )
+			{
+				// 判断两次点击的时间间隔（默认设置为2秒）
+				if ( ( System.currentTimeMillis() - mExitTime ) > 2000 )
+				{
+					ViewInject.toast( "再按一次退出程序" );
+					mExitTime = System.currentTimeMillis();
+				}
+				else
+				{
+					finish();
+					System.exit( 0 );
+					super.onBackPressed();
+				}
+			}
+			else
+			{
+				mSlidingMenu.getResideMenu().closeMenu();
+			}
+			return true;
+		}
+		return super.onKeyDown( keyCode, event );
+	}
+
+	/**
+	 * 
+	 * @Description: 刷新主界面
+	 * @param
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015年9月26日
+	 */
+	public void reFresh()
+	{
+		// 刷新菜单
+		mSlidingMenu.reFresh();
+	}
+}

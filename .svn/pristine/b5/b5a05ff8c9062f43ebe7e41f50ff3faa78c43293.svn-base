@@ -1,0 +1,165 @@
+package com.ipbase.fragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.http.HttpParams;
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+import org.kymjs.kjframe.utils.StringUtils;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import com.alibaba.fastjson.JSON;
+import com.ipbase.AppContext;
+import com.ipbase.R;
+import com.ipbase.bean.FeedBack;
+import com.ipbase.utils.CommonUtils;
+
+/**
+ * 意见反馈
+ * 
+ * @author 李先华 2015年10月13日下午8:23:14
+ */
+public class FeedbackFragment extends SimpleBackFragment
+{
+	private String WEB_PATH;
+
+	// 提交按钮
+	@ BindView( id = R.id.btn_feedback, click = true )
+	public Button mBtnFeedback;
+
+	@ BindView( id = R.id.et_feedback )
+	public EditText etFeedback;
+
+	// 反馈的意见
+	public String mStrFeedback;
+
+	public KJHttp mKjHttp;
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_feedback, null );
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+
+		// 网络连接相关
+		WEB_PATH = getString( R.string.url_base )
+				+ getString( R.string.url_feedback );
+		mKjHttp = new KJHttp();
+	}
+
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		// TODO Auto-generated method stub
+		super.initWidget( parentView );
+		setTitle( "意见反馈" );
+	}
+
+	@ Override
+	protected void widgetClick( View v )
+	{
+		super.widgetClick( v );
+		switch ( v.getId() )
+		{
+			case R.id.btn_feedback :
+				doSubmit();
+				break;
+			default :
+				break;
+		}
+	}
+
+	/**
+	 * @Title: doSubmit
+	 * @Description: 检查反馈意见是否为空
+	 * @param
+	 * @return void
+	 * @throws
+	 * @auhor 鲜花
+	 * @date 2015年10月14日
+	 */
+	private void doSubmit()
+	{
+		mStrFeedback = etFeedback.getText().toString().trim();
+		if ( StringUtils.isEmpty( mStrFeedback ) )
+		{
+			ViewInject.toast( "反馈意见不能为空！" );
+			return;
+		}
+		SubmitFeedback();
+	}
+
+	/**
+	 * @Title: SubmitFeedback
+	 * @Description: 提交意见反馈
+	 * @param
+	 * @return void
+	 * @throws
+	 * @auhor 鲜花
+	 * @date 2015年10月14日
+	 */
+	private void SubmitFeedback()
+	{
+		if ( !CommonUtils.hasNetwork( getActivity() ) )
+		{
+			ViewInject.toast( "请检查网络连接!" );
+			return;
+		}
+
+		FeedBack feedBack = new FeedBack();
+		feedBack.setUser_id( AppContext.getInstance().getUser().getId() );
+		feedBack.setContent( mStrFeedback );
+
+		HttpParams params = new HttpParams();
+		params.putJsonParams( JSON.toJSONString( feedBack ) );
+
+		Log.i( "params", JSON.toJSONString( feedBack ) );
+
+		mKjHttp.jsonPost( WEB_PATH, params, false, new HttpCallBack()
+		{
+			@ Override
+			public void onSuccess( String t )
+			{
+				super.onSuccess( t );
+				// ViewInject.toast(t);
+				try
+				{
+					JSONObject object = new JSONObject( t );
+					boolean success = object.getBoolean( "result" );
+					String msg = object.getString( "msg" );
+					// ViewInject.toast(msg);
+					if ( success )
+					{
+						ViewInject.toast( "提交成功，感谢您的反馈" );
+						onBackClick();
+					}
+				}
+				catch ( JSONException e )
+				{
+					e.printStackTrace();
+				}
+			}
+
+			@ Override
+			public void onFailure( int errorNo, String strMsg )
+			{
+				super.onFailure( errorNo, strMsg );
+				ViewInject.toast( "错误码:" + errorNo + "错误信息:" + strMsg );
+				Log.i( "onFailure", "错误码:" + errorNo + "错误信息:" + strMsg );
+			}
+		} );
+	}
+};

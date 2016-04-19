@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/lv_search_result_item_selector"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/tv_search_result_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="浪费的设计费拉升发动机的收费举案说法f卷发快速的法律举案说法军绿色家乐福sd卡"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_search_result_article_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="余小金"
+            android:textColor="@color/gray2"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_search_result_article_publish_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2015-11-4"
+            android:textColor="@color/gray2"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_search_result_digest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="浪费的设计费拉升发动机的收费举案说法f卷发快速的法律举案说法军绿色家乐福sd卡kjgkljlfajslfjlasd就阿萨德发加拉斯减肥拉萨的房间拉萨的叫法"
+        android:textColor="@color/gray"
+        android:textSize="14sp" />
+
+</LinearLayout>

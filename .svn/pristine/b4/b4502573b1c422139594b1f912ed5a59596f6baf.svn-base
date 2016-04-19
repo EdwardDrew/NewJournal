@@ -1,0 +1,21 @@
+package com.ipbase.ui;
+
+import org.kymjs.kjframe.KJActivity;
+
+import com.ipbase.R;
+
+/**
+ * 搜索结果
+ * 
+ * @author 李先华 2015年8月29日上午10:22:28
+ */
+public class SearchResultActivity extends KJActivity
+{
+
+	@ Override
+	public void setRootView()
+	{
+		setContentView( R.layout.activity_search_result );
+	}
+
+}

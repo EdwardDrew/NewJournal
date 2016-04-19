@@ -1,0 +1,68 @@
+package com.ipbase.widget;
+
+import org.kymjs.kjframe.ui.ViewInject;
+
+import com.ipbase.R;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+public class NickNameDialog extends Dialog
+{
+	private String originlName;
+	private Button mOKButton;
+	private EditText mEdittext;
+	private onClickOKButtonListener mListener;
+
+	public interface onClickOKButtonListener
+	{
+		public void back( String newNickName );
+	}
+
+	@ Override
+	protected void onCreate( Bundle savedInstanceState )
+	{
+		super.onCreate( savedInstanceState );
+		setContentView( R.layout.edittext_dialog );
+		setTitle( "新名字" );
+
+		init();
+	}
+
+	public NickNameDialog( Context cxt, String nickName,
+			onClickOKButtonListener listener )
+	{
+		super( cxt );
+		mListener = listener;
+		originlName = nickName;
+	}
+
+	private void init()
+	{
+		mEdittext = (EditText) findViewById( R.id.nickName_edit );
+		mEdittext.setText( originlName );
+		mEdittext.setSelectAllOnFocus( true );
+		mOKButton = (Button) findViewById( R.id.nickName_button );
+		mOKButton.setOnClickListener( new View.OnClickListener()
+		{
+			@ Override
+			public void onClick( View v )
+			{
+				String newNickName = mEdittext.getText().toString();
+				if ( newNickName == null || newNickName.trim().equals( "" ) )
+				{
+					ViewInject.toast( "请填写昵称再提交" );
+					return;
+				}
+
+				mListener.back( newNickName );
+				NickNameDialog.this.dismiss();
+			}
+		} );
+	}
+
+}

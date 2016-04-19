@@ -1,0 +1,255 @@
+package com.ipbase.fragment;
+
+import java.util.ArrayList;
+
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+
+import com.ipbase.R;
+import com.ipbase.adapter.EmojiAdapter;
+import com.ipbase.widget.NcmWebView;
+import com.ipbase.widget.NcmWebView.OnScrollChangeListener;
+import com.ipbase.widget.NcmWebViewClient;
+
+/**
+ * ClassName: ScanArticleFragment
+ * 
+ * @Description: 浏览文章内容页面
+ * @author xinyi
+ * @date 2016-02-20
+ */
+public class ScanArticleFragment extends SimpleBackFragment
+{
+	// 访问文章的 url
+	private String WEB_PATH_Article;
+	// 文章 ID
+	private String mArticleID;
+	private String mTitle;
+	private String mAuthor;
+
+	// @ BindView( id = R.id.web_sl )
+	// private NCMScrollView parentScrollView;
+	@ BindView( id = R.id.rl_facechoose )
+	private View chooseView;
+	@ BindView( id = R.id.btn_send, click = true )
+	private Button btn_sendComment;
+	@ BindView( id = R.id.btn_face, click = true )
+	private ImageView iv_face;
+	@ BindView( id = R.id.et_sendmessage, click = true )
+	private EditText content_edit;
+	@ BindView( id = R.id.listview_face )
+	private ListView listview_face;
+	@ BindView( id = R.id.webView )
+	private NcmWebView webView;
+	@ BindView( id = R.id.progress )
+	private ProgressBar mProgressBar;
+
+	private ArrayList< String > msgList;
+	private EmojiAdapter emojiApdater;
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_webview, null );
+	}
+
+	@ Override
+	protected void initData()
+	{
+		super.initData();
+		getBundle();
+
+		// 网络连接相关
+		WEB_PATH_Article = getString( R.string.url_base )
+				.replace( "/rest", "/" )
+				+ getString( R.string.url_article )
+				+ "/show/" + mArticleID;
+
+		// 设置标题栏
+		setTitle( mAuthor + " — " + mTitle );
+		chooseView.setVisibility( View.GONE );
+	}
+
+	private void getBundle()
+	{
+		/* 获取数据 */
+		Bundle bundle = getArguments();
+		if ( bundle != null )
+		{
+			String temp = bundle.getString( "ArticleID" );
+			if ( temp != null && !temp.equals( "" ) )
+			{
+				mArticleID = temp;
+			}
+			else
+			{
+				mArticleID = "";
+			}
+			temp = bundle.getString( "AuthorName" );
+			if ( temp != null && !temp.equals( "" ) )
+			{
+				mAuthor = temp;
+			}
+			else
+			{
+				mAuthor = "";
+			}
+			temp = bundle.getString( "ArticleTitle" );
+			if ( temp != null && !temp.equals( "" ) )
+			{
+				mTitle = temp;
+			}
+			else
+			{
+				mTitle = "";
+			}
+		}
+		else
+		{
+			mArticleID = "";
+			mAuthor = "";
+			mTitle = "";
+		}
+	}
+
+	@ SuppressLint( { "SetJavaScriptEnabled", "ClickableViewAccessibility" } )
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+		webView.loadData( "", "text/html", "utf-8" );
+		webView.setOnScrollChangeListener( listener );
+		webView.setWebViewClient( new NcmWebViewClient( mProgressBar ) );
+		webView.setWebChromeClient( new WebChromeClient()
+		{
+			@ Override
+			public void onProgressChanged( WebView view, int newProgress )
+			{
+				mProgressBar.setProgress( newProgress );
+			}
+		} );
+		init();
+	}
+
+	private void init()
+	{
+		if ( mArticleID != null && mArticleID.length() > 0 )
+		{
+			webView.loadUrl( WEB_PATH_Article );
+		}
+		else
+		{
+			ViewInject.toast( "网络错误或未知原因，请重试！" );
+		}
+
+		msgList = new ArrayList< String >();
+		msgList.add( "[媚眼]测试啦[媚眼]" );
+		msgList.add( "你妹[苦逼]" );
+		msgList.add( "测[惊讶]你妹" );
+
+		emojiApdater = new EmojiAdapter( outsideAty, msgList );
+		listview_face.setAdapter( emojiApdater );
+		listview_face.setOnScrollListener( new OnScrollListener()
+		{
+			// ListView 第一项的索引
+			private int mCurrentFirstVisibleItem = 0;
+			// ListView 上一次的索引
+			private int mLastFirstVisibleItem = 0;
+
+			@ Override
+			public void onScrollStateChanged( AbsListView view, int scrollState )
+			{
+			}
+
+			@ Override
+			public void onScroll( AbsListView view, int firstVisibleItem,
+					int visibleItemCount, int totalItemCount )
+			{
+				if ( listview_face.getChildCount() > 0 )
+				{
+					mCurrentFirstVisibleItem = listview_face
+							.getFirstVisiblePosition();
+					if ( mCurrentFirstVisibleItem > mLastFirstVisibleItem )
+					{
+						// Log.e( "xinyiTag", "向上滑动" );
+					}
+					else if ( mCurrentFirstVisibleItem < mLastFirstVisibleItem )
+					{
+						// Log.e( "xinyiTag", "向下滑动" );
+						if ( chooseView.getVisibility() != View.GONE )
+						{
+							chooseView.setVisibility( View.GONE );
+						}
+					}
+					mLastFirstVisibleItem = mCurrentFirstVisibleItem;
+				}
+			}
+		} );
+	}
+
+	@ Override
+	protected void widgetClick( View view )
+	{
+		super.widgetClick( view );
+		switch ( view.getId() )
+		{
+			case R.id.btn_face :
+				// 隐藏表情选择框
+				if ( chooseView.getVisibility() == View.VISIBLE )
+				{
+					chooseView.setVisibility( View.GONE );
+				}
+				else
+				{
+					chooseView.setVisibility( View.VISIBLE );
+				}
+				break;
+			case R.id.et_sendmessage :
+				// 隐藏表情选择框
+				chooseView.setVisibility( View.GONE );
+				break;
+			case R.id.btn_send :
+				msgList.add( content_edit.getText().toString() );
+				emojiApdater.notifyDataSetChanged();
+				listview_face.setSelection( listview_face.getBottom() );
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	private OnScrollChangeListener listener = new OnScrollChangeListener()
+	{
+		@ Override
+		public void onScrollChanged( int l, int t, int oldl, int oldt )
+		{
+		}
+
+		@ Override
+		public void onPageTop( int l, int t, int oldl, int oldt )
+		{
+		}
+
+		@ Override
+		public void onPageEnd( int l, int t, int oldl, int oldt )
+		{
+		}
+	};
+};

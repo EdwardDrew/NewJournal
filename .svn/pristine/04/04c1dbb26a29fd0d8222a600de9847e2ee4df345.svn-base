@@ -1,0 +1,22 @@
+package com.ipbase.fragment;
+
+
+
+public class LogOutFragment
+{
+
+//	@ Override
+//	protected View inflaterView( LayoutInflater layoutInflater,
+//			ViewGroup viewGroup, Bundle bundle )
+//	{
+//		AppContext.getInstance()
+//				.deleteUser( AppContext.getInstance().getUser() );
+//		MainActivity activity = AppApplication.getInstance().getMainActivity();
+//		if ( activity != null )
+//		{
+//			activity.reFresh();
+//		}
+//		return null;
+//	}
+
+};

@@ -1,0 +1,18 @@
+package com.ipbase.utils;
+
+import cn.bmob.v3.Bmob;
+
+import com.ipbase.AppConfig;
+
+import android.app.Activity;
+
+public class BmobUtils
+{
+	private Activity mActivity;
+
+	public BmobUtils( Activity outAty )
+	{
+		mActivity = outAty;
+		Bmob.initialize( mActivity, AppConfig.Bmob_Key );
+	}
+};

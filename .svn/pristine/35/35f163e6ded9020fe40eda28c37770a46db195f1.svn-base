@@ -1,0 +1,96 @@
+package com.ipbase.fragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import com.ipbase.R;
+import com.ipbase.adapter.SearchResultAdapter;
+import com.ipbase.bean.Article;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+/**
+ * 搜索结果页面
+ * @author 李先华
+ *2015年11月5日下午10:45:48
+ */
+public class SearchResultFragment extends SimpleBackFragment
+{
+	@BindView( id = R.id.lv_search_result)
+	private ListView mLvSearchResult;
+
+	private ArrayList<Article> mArticles = null;
+
+	private SearchResultAdapter mSearchResultAdapter;
+	
+	private Article mArticle;
+	
+	@ Override
+	protected View inflaterView( LayoutInflater arg0, ViewGroup arg1,
+			Bundle arg2 )
+	{
+		return View.inflate( outsideAty, R.layout.activity_search_result, null );
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected void initData() {
+		// TODO Auto-generated method stub
+		super.initData();
+		//获得传过来的List<Object>
+		//		articles = getArguments().getParcelableArrayList("mArticles");
+		mArticles = (ArrayList<Article>) getBundleData().getSerializable("mArticles");
+
+/*		if (mArticles != null && mArticles.size() > 0)
+		{
+			for (int i = 0; i < mArticles.size(); i++) 
+			{
+				Log.i("SearchResultFragment articles "+i, mArticles.get(i).getAuthor());
+			}
+		}
+		else 
+		{
+			ViewInject.toast("articles没数据");
+		}*/
+
+
+	}
+
+	@Override
+	protected void initWidget(View parentView) {
+		// TODO Auto-generated method stub
+		super.initWidget(parentView);
+		setRLVisible(View.GONE);
+		setRLSearchVisible(View.VISIBLE);
+		
+		mSearchResultAdapter = new SearchResultAdapter(outsideAty, mArticles);
+		mLvSearchResult.setAdapter(mSearchResultAdapter);
+		mLvSearchResult.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				mArticle = (Article) mSearchResultAdapter.getItem(position);
+				ViewInject.toast(mArticle.getContent());
+			}
+			
+		});
+	}
+
+	@Override
+	protected void widgetClick(View v) {
+		// TODO Auto-generated method stub
+		super.widgetClick(v);
+	}
+};

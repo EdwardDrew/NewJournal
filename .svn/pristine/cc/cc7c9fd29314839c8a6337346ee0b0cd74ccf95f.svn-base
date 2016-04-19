@@ -1,0 +1,130 @@
+package com.ipbase.widget;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+
+import com.ipbase.R;
+import com.ipbase.adapter.QiAdapter;
+import com.ipbase.adapter.YearAdapter;
+import com.ipbase.utils.StaticData;
+
+/**
+ * * 年月控件类，可简化MainActivity的代码量
+ * 
+ * @author xinyi 2015年10月5日上午
+ * */
+public class YearMonthWidget
+{
+	private Activity mActivity;
+	// 年份listview
+	private MultiListView yearListView;
+	// 期listview
+	private MultiListView qiListView;
+	// 年份adapter
+	private YearAdapter yearAdapter;
+	// 期adapter
+	private QiAdapter qiAdapter;
+
+	public YearMonthWidget( Activity outActivity )
+	{
+		mActivity = outActivity;
+		initWidget();
+		initWidgetListener();
+	}
+
+	private void initWidget()
+	{
+		yearListView = (MultiListView) mActivity
+				.findViewById( R.id.yearListView );
+		qiListView = (MultiListView) mActivity.findViewById( R.id.qiListView );
+		yearAdapter = new YearAdapter( mActivity, StaticData.years );
+		yearListView.setAdapter( yearAdapter );
+
+		selectDefult();
+	}
+
+	private void initWidgetListener()
+	{
+		yearListView.setOnItemClickListener( new OnItemClickListener()
+		{
+			@ Override
+			public void onItemClick( AdapterView< ? > arg0, View arg1, int pos,
+					long arg3 )
+			{
+				final int location = pos;
+				yearAdapter.setSelectedPosition( pos );
+				yearAdapter.notifyDataSetInvalidated();
+				qiAdapter = new QiAdapter( mActivity, StaticData.qies, pos );
+				qiListView.setAdapter( qiAdapter );
+				qiListView.setOnItemClickListener( new OnItemClickListener()
+				{
+					@ Override
+					public void onItemClick( AdapterView< ? > arg0, View arg1,
+							int pos, long arg3 )
+					{
+						Toast.makeText( mActivity,
+								StaticData.qies[location][pos],
+								Toast.LENGTH_SHORT ).show();
+					}
+				} );
+			}
+		} );
+	}
+
+	/**
+	 * 二级列表默认选择
+	 */
+	private void selectDefult()
+	{
+		final int location = 0;
+		yearAdapter.setSelectedPosition( 0 );
+		yearAdapter.notifyDataSetInvalidated();
+		qiAdapter = new QiAdapter( mActivity, StaticData.qies, 0 );
+		qiListView.setAdapter( qiAdapter );
+		qiListView.setOnItemClickListener( new OnItemClickListener()
+		{
+			@ Override
+			public void onItemClick( AdapterView< ? > arg0, View arg1, int pos,
+					long arg3 )
+			{
+				Toast.makeText( mActivity, StaticData.qies[location][pos],
+						Toast.LENGTH_SHORT ).show();
+			}
+		} );
+	}
+
+	/**
+	 * @return yearListView
+	 */
+	public MultiListView getYearListView()
+	{
+		return yearListView;
+	}
+
+	/**
+	 * @return qiListView
+	 */
+	public MultiListView getQiListView()
+	{
+		return qiListView;
+	}
+
+	/**
+	 * @return yearAdapter
+	 */
+	public YearAdapter getYearAdapter()
+	{
+		return yearAdapter;
+	}
+
+	/**
+	 * @return qiAdapter
+	 */
+	public QiAdapter getQiAdapter()
+	{
+		return qiAdapter;
+	}
+};

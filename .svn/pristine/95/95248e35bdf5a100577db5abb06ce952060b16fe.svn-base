@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="back">#333333</color>
+    <color name="layout_info">#402b22</color>
+    <color name="layout_left_menu">#39251d</color>
+    <color name="white">#ffffff</color>
+    <color name="search_edit">#4d2914</color>
+    <color name="lv_search_result_bg">#f2f2f2</color>
+    <color name="lv_search_result_digest">#666666</color>
+    <color name="divider">#999999</color>
+    <color name="yellow">#eee159</color>
+    <color name="yellow2">#ffdf32</color>
+    <color name="gold">#EEE159</color>
+    <color name="gray">#666666</color>
+    <color name="gray2">#999999</color>
+    <color name="gray3">#CCCCCC</color>
+    <color name="gray4">#EEEEEE</color>
+    <color name="gray5">#a5a5a5</color>
+
+</resources>

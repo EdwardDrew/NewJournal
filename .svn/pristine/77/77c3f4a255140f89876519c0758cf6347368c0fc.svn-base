@@ -1,0 +1,50 @@
+package com.ipbase.fragment;
+
+import org.kymjs.kjframe.ui.BindView;
+
+import com.ipbase.R;
+import com.ipbase.bean.FragmentPages;
+import com.ipbase.ui.SimpleBackActivity;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+
+public class SearchFragment extends SimpleBackFragment
+{
+	@ BindView( id = R.id.iv_search, click = true )
+	private ImageView mIvSearch;
+
+	@ Override
+	protected View inflaterView( LayoutInflater layoutInflater,
+			ViewGroup viewGroup, Bundle bundle )
+	{
+		return View.inflate( outsideAty, R.layout.activity_search, null );
+	}
+
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+		setTitle( "文献搜索" );
+	}
+
+	@ Override
+	protected void widgetClick( View view )
+	{
+		switch ( view.getId() )
+		{
+			case R.id.iv_search :
+				SimpleBackActivity.postShowWith( outsideAty,
+						FragmentPages.SearchResult_Page );
+				break;
+
+			default :
+				break;
+		}
+		super.widgetClick( view );
+	}
+
+};

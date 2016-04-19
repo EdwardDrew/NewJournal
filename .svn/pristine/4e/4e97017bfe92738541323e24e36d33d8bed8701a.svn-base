@@ -1,0 +1,246 @@
+package com.ipbase.ui;
+
+import org.kymjs.kjframe.KJActivity;
+import org.kymjs.kjframe.ui.BindView;
+
+import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.ipbase.R;
+import com.ipbase.bean.FragmentPages;
+import com.ipbase.fragment.SimpleBackFragment;
+
+/**
+ * 
+ * ClassName: SimpleBackActivity
+ * 
+ * @Description: 一个返回键的titilebar Activity
+ * @author kesar
+ * @date 2015-9-2
+ */
+public class SimpleBackActivity extends KJActivity
+{
+	@ BindView( id = R.id.titlebar_img_back, click = true )
+	protected ImageView mImgBack; // 返回图标
+	@ BindView( id = R.id.titlebar_text_title )
+	protected TextView mTvTitle; // 标题
+
+	// 当前正在使用的Fragment
+	protected SimpleBackFragment currentFragment;
+	// intent的key
+	public static String CONTENT_KEY = "sba_content_key";
+	public static String DATA_KEY = "sba_datat_key";
+
+	@ Override
+	protected void onCreate( Bundle savedInstanceState )
+	{
+		requestWindowFeature( Window.FEATURE_NO_TITLE );
+		setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT );
+
+		super.onCreate( savedInstanceState );
+	}
+
+	@ Override
+	public void setRootView()
+	{
+		// 设置layout
+		setContentView( R.layout.activity_simple_back );
+
+		// 绕过static拿到非静态的实例
+		int value = getIntent().getIntExtra( CONTENT_KEY, -1 );
+		if ( value != -1 )
+		{
+			try
+			{
+				// 通过class得到fragment的实例
+				currentFragment = (SimpleBackFragment) FragmentPages
+						.getPageByValue( value ).newInstance();
+				Bundle bundle = getIntent().getBundleExtra( DATA_KEY );
+				if ( bundle != null )
+				{
+					currentFragment.setArguments( bundle );
+				}
+				// 修改fragment
+				changeFragment( currentFragment );
+			}
+			catch ( InstantiationException e )
+			{
+			}
+			catch ( IllegalAccessException e )
+			{
+			}
+		}
+	}
+
+	@ Override
+	public void widgetClick( View v )
+	{
+		super.widgetClick( v );
+		switch ( v.getId() )
+		{
+			case R.id.titlebar_img_back :
+				onBackClick();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/**
+	 * 
+	 * @Description: 设置标题
+	 * @param @param title
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015-9-1
+	 */
+	public void setTitle( String title )
+	{
+		if ( mTvTitle != null )
+		{
+			mTvTitle.setText( title );
+		}
+	}
+
+	/**
+	 * 
+	 * @Description: 返回按钮点击事件
+	 * @param
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015-9-1
+	 */
+	public void onBackClick()
+	{
+		if ( currentFragment != null )
+		{
+			currentFragment.onBackClick();
+		}
+	}
+
+	/**
+	 * 重写android手机返回按钮
+	 */
+	@ Override
+	public void onBackPressed()
+	{
+		onBackClick();
+	}
+
+	/**
+	 * 
+	 * @Description: 设置返回按钮的图标
+	 * @param @param resId
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015-9-1
+	 */
+	public void setBackImage( int resId )
+	{
+		if ( mImgBack != null )
+		{
+			mImgBack.setImageResource( resId );
+		}
+		else
+		{
+			mImgBack = (ImageView) findViewById( resId );
+			mImgBack.setOnClickListener( this );
+		}
+	}
+
+	/**
+	 * 
+	 * @Description: 修改fragment
+	 * @param @param targetFragment
+	 * @return void
+	 * @throws
+	 * @author kesar
+	 * @date 2015-9-1
+	 */
+	public void changeFragment( SimpleBackFragment targetFragment )
+	{
+		currentFragment = targetFragment;
+		super.changeFragment( R.id.main_content, targetFragment );
+	}
+
+	public Bundle getBundleData()
+	{
+		return getIntent().getBundleExtra( DATA_KEY );
+	}
+
+	/**
+	 * 跳转到SimpleBackActivity时，只能使用该方法跳转
+	 * 
+	 * @param cxt
+	 * @param page
+	 * @param data
+	 */
+	public static void postShowWith( Context cxt, FragmentPages page,
+			Bundle data )
+	{
+		Intent intent = new Intent( cxt, SimpleBackActivity.class );
+		intent.putExtra( CONTENT_KEY, page.getValue() );
+		intent.putExtra( DATA_KEY, data );
+		cxt.startActivity( intent );
+	}
+
+	/**
+	 * 跳转到SimpleBackActivity时，只能使用该方法跳转
+	 * 
+	 * @param cxt
+	 * @param page
+	 */
+	public static void postShowWith( Context cxt, FragmentPages page )
+	{
+		postShowWith( cxt, page, null );
+	}
+
+	/**
+	 * 跳转到SimpleBackActivity时，只能使用该方法跳转
+	 * 
+	 * @param fragment
+	 *            从哪个Activity跳转
+	 * @param code
+	 *            启动码
+	 * @param page
+	 *            要显示的Fragment
+	 * @param data
+	 *            传递的Bundle数据
+	 */
+	public static void postShowForResult( Fragment fragment, int code,
+			FragmentPages page, Bundle data )
+	{
+		Intent intent = new Intent( fragment.getActivity(),
+				SimpleBackActivity.class );
+		intent.putExtra( CONTENT_KEY, page.getValue() );
+		intent.putExtra( DATA_KEY, data );
+		fragment.startActivityForResult( intent, code );
+	}
+
+	/**
+	 * 跳转到SimpleBackActivity时，只能使用该方法跳转
+	 * 
+	 * @param fragment
+	 *            从哪个Activity跳转
+	 * @param code
+	 *            启动码
+	 * @param page
+	 *            要显示的Fragment
+	 */
+	public static void postShowForResult( Fragment fragment, int code,
+			FragmentPages page )
+	{
+		postShowForResult( fragment, code, page, null );
+	}
+}

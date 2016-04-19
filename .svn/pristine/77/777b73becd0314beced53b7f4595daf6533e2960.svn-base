@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/lv_search_result_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" 
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_state1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iv_state1_selector" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已投稿"
+                android:textColor="@color/gray2"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iv_point_selector" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_state2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iv_state2_selector" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已审核"
+                android:textColor="@color/gray2"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_point2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iv_point_selector" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_state3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iv_state3_selector" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已录用"
+                android:textColor="@color/gray2"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_point3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iv_point_selector" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/iv_state4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/iv_state4_selector" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="缴纳版面费"
+                android:textColor="@color/gray2"
+                android:textSize="10sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_upload_fee_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/upload_fee"
+        android:text="@string/btn_upload_fee_pic"
+        android:paddingTop="50dp"
+        android:textColor="@color/yellow"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:gravity="center_horizontal" >
+
+        <Button
+            android:id="@+id/btn_post_office"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/yes"
+            android:text="邮局汇款 "
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_wechat_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/no"
+            android:text="微信支付"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

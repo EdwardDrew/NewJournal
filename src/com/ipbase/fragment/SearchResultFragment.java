@@ -1,0 +1,265 @@
+package com.ipbase.fragment;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.kymjs.kjframe.KJHttp;
+import org.kymjs.kjframe.http.HttpCallBack;
+import org.kymjs.kjframe.http.HttpParams;
+import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.ui.ViewInject;
+
+import com.ipbase.R;
+import com.ipbase.adapter.SearchResultAdapter;
+import com.ipbase.bean.Article;
+import com.ipbase.utils.CommonUtils;
+import com.ipbase.utils.FastJsonTools;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+/**
+ * 搜索结果页面
+ * 
+ * @author 李先华 2015年11月5日下午10:45:48
+ */
+public class SearchResultFragment extends SimpleBackFragment implements
+		TextWatcher
+{
+	private String WEB_PATH;
+
+	private KJHttp kjh;
+
+	// 这里不能用KJFrame绑定控件id
+	private EditText mEitSearch;
+	private ImageView mIvSearch;
+	private ImageView mIvDeleteText;
+
+	@ BindView( id = R.id.lv_search_result )
+	private ListView mLvSearchResult;
+
+	private ArrayList< Article > mArticles = null;
+
+	private SearchResultAdapter mSearchResultAdapter;
+
+	private Article mArticle;
+
+	// 搜索词
+	private String mSearchWord = null;
+
+	@ Override
+	protected View inflaterView( LayoutInflater arg0, ViewGroup arg1,
+			Bundle arg2 )
+	{
+		return View.inflate( outsideAty, R.layout.fragment_search_result, null );
+	}
+
+	@ SuppressWarnings( "unchecked" )
+	@ Override
+	protected void initData()
+	{
+		// TODO Auto-generated method stub
+		super.initData();
+		// 获得传过来的List<Object>
+		// articles = getArguments().getParcelableArrayList("mArticles");
+		mArticles = (ArrayList< Article >) getBundleData().getSerializable(
+				"mArticles" );
+		mSearchWord = getArguments().getString( "SearchWord" );
+
+		WEB_PATH = getString( R.string.url_base )
+				+ getString( R.string.url_search );
+
+		kjh = new KJHttp();
+
+	}
+
+	@ Override
+	protected void initWidget( View parentView )
+	{
+		super.initWidget( parentView );
+		setRLVisible( View.GONE );
+		setRLSearchVisible( View.VISIBLE );
+
+		mSearchResultAdapter = new SearchResultAdapter( outsideAty, mArticles );
+		mLvSearchResult.setAdapter( mSearchResultAdapter );
+		mLvSearchResult.setOnItemClickListener( new OnItemClickListener()
+		{
+			@ Override
+			public void onItemClick( AdapterView< ? > parent, View view,
+					int position, long id )
+			{
+				mArticle = (Article) mSearchResultAdapter.getItem( position );
+				// 跳转到文章查看页面
+				ViewInject.toast( mArticle.getContent() );
+			}
+
+		} );
+
+		findViewById();
+		// 初始化EditText的监听器
+		initTextChangedListener();
+
+		mEitSearch.setText( mSearchWord );
+
+		RefreshSearch();
+
+	}
+
+	@ Override
+	protected void widgetClick( View v )
+	{
+		super.widgetClick( v );
+		switch ( v.getId() )
+		{
+			case R.id.iv_search :
+				RefreshSearch();
+				break;
+			case R.id.iv_delete_text :
+				mEitSearch.setText( "" );
+				break;
+			default :
+				break;
+		}
+	}
+
+	private void RefreshSearch()
+	{
+		if ( !CommonUtils.hasNetwork( getActivity() ) )
+		{
+			ViewInject.toast( "请检查网络连接!" );
+			return;
+		}
+
+		if ( mEitSearch.getText().toString().trim().isEmpty() )
+		{
+			ViewInject.toast( "请输入搜索内容(作者或者文章标题)" );
+			return;
+		}
+		// 搜索词
+		String searchWord = null;
+		try
+		{
+			searchWord = URLEncoder.encode( mEitSearch.getText().toString()
+					.trim(), "UTF-8" ); // 中文传输解决
+		}
+		catch ( UnsupportedEncodingException e )
+		{
+			e.printStackTrace();
+		}
+		// 搜索
+		getSearchResultFromServer( WEB_PATH + searchWord, kjh, this );
+	}
+
+	private void findViewById()
+	{
+
+		mIvDeleteText = (ImageView) outsideAty
+				.findViewById( R.id.iv_delete_text );
+
+		mEitSearch = (EditText) outsideAty.findViewById( R.id.et_search );
+
+		mIvSearch = (ImageView) outsideAty.findViewById( R.id.iv_search );
+
+		mIvDeleteText.setOnClickListener( this );
+
+		mIvSearch.setOnClickListener( this );
+	}
+
+	private void initTextChangedListener()
+	{
+		mEitSearch.addTextChangedListener( this );
+	}
+
+	@ Override
+	public void beforeTextChanged( CharSequence s, int start, int count,
+			int after )
+	{
+
+	}
+
+	@ Override
+	public void onTextChanged( CharSequence s, int start, int before, int count )
+	{
+
+	}
+
+	@ Override
+	public void afterTextChanged( Editable s )
+	{
+		if ( s.length() == 0 )
+		{
+			mIvDeleteText.setVisibility( View.GONE );
+		}
+		else
+		{
+			mIvDeleteText.setVisibility( View.VISIBLE );
+		}
+	}
+
+	private void getSearchResultFromServer( String WEB_PATH, KJHttp kjh,
+			final SimpleBackFragment fragment )
+	{
+
+		kjh.get( WEB_PATH, new HttpParams(), false, new HttpCallBack()
+		{
+			@ Override
+			public void onSuccess( String t )
+			{
+				super.onSuccess( t );
+
+				// Log.i("SearchResultFragment onSuccess ", t);
+				try
+				{
+					ArrayList< Article > articleLists = null;
+					JSONObject object = new JSONObject( t );
+					boolean success = object.getBoolean( "result" );
+					String articles = object.getString( "articles" );
+					// Log.i("SearchResultFragment articlesTitle",
+					// articlesTitle);
+					// Log.i("SearchResultFragment articlesAuthor",
+					// articlesAuthor);
+					if ( success )
+					{
+						articleLists = (ArrayList< Article >) FastJsonTools
+								.getBeans( articles, Article.class );
+						// 更改listview数据
+						mSearchResultAdapter = new SearchResultAdapter(
+								outsideAty, articleLists );
+						mLvSearchResult.setAdapter( mSearchResultAdapter );
+					}
+					else
+					{
+						ViewInject.toast( object.getString( "msg" ) );
+					}
+				}
+				catch ( JSONException e )
+				{
+					e.printStackTrace();
+					ViewInject.toast( "JSONException " + e.getMessage() );
+				}
+
+			}
+
+			@ Override
+			public void onFailure( int errorNo, String strMsg )
+			{
+				super.onFailure( errorNo, strMsg );
+				ViewInject.toast( "错误码:" + errorNo + ", 错误信息:" + strMsg );
+			}
+
+		} );
+
+	}
+};
