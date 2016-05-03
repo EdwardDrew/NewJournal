@@ -7,20 +7,26 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
-public class CircleImage extends MaskedImage {
-	public CircleImage(Context paramContext) {
+public class CircleImage extends MaskedImage
+{
+	public CircleImage(Context paramContext)
+	{
 		super(paramContext);
 	}
 
-	public CircleImage(Context paramContext, AttributeSet paramAttributeSet) {
+	public CircleImage(Context paramContext, AttributeSet paramAttributeSet)
+	{
 		super(paramContext, paramAttributeSet);
 	}
 
-	public CircleImage(Context paramContext, AttributeSet paramAttributeSet, int paramInt) {
+	public CircleImage(Context paramContext, AttributeSet paramAttributeSet,
+			int paramInt)
+	{
 		super(paramContext, paramAttributeSet, paramInt);
 	}
 
-	public Bitmap createMask() {
+	public Bitmap createMask()
+	{
 		int i = getWidth();
 		int j = getHeight();
 		Bitmap.Config localConfig = Bitmap.Config.ARGB_8888;

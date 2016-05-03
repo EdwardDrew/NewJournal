@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/shadow"
         android:contentDescription="@string/app_name"
-        android:scaleType="fitXY" />
+        android:scaleType="center" />
 
     <LinearLayout
         android:id="@+id/rl_left_menu"

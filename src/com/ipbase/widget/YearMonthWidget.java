@@ -50,12 +50,12 @@ public class YearMonthWidget
 	private ArrayList< YMWidgetBean > mData;
 	private int mCurPos;
 
-	static public ProgressDialog DIALOG;
+//	static public ProgressDialog DIALOG;
 
 	public YearMonthWidget( Activity outActivity )
 	{
 		mActivity = outActivity;
-		DIALOG = ViewInject.getprogress( mActivity, "获取文章列表中，请稍候...", false );
+//		DIALOG = ViewInject.getprogress( mActivity, "获取文章列表中，请稍候...", false );
 		initWidget();
 	}
 
@@ -219,14 +219,14 @@ public class YearMonthWidget
 						SimpleBackActivity.postShowWith( mActivity,
 								FragmentPages.ArticleList_Page, bundle );
 
-						DIALOG.show();
+//						DIALOG.show();
 					}
 				} );
 
-				if ( YearMonthWidget.DIALOG.isShowing() )
+				/*if ( YearMonthWidget.DIALOG.isShowing() )
 				{
 					YearMonthWidget.DIALOG.dismiss();
-				}
+				}*/
 			}
 		} );
 		qiListView.setOnItemClickListener( new OnItemClickListener()
@@ -245,14 +245,14 @@ public class YearMonthWidget
 				SimpleBackActivity.postShowWith( mActivity,
 						FragmentPages.ArticleList_Page, bundle );
 
-				DIALOG.show();
+//				DIALOG.show();
 			}
 		} );
 
-		if ( YearMonthWidget.DIALOG.isShowing() )
+		/*if ( YearMonthWidget.DIALOG.isShowing() )
 		{
 			YearMonthWidget.DIALOG.dismiss();
-		}
+		}*/
 	}
 
 	private String findUrlFromData( int yearPos, int qikanPos )

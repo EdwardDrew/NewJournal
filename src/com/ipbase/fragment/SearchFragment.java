@@ -14,6 +14,7 @@ import org.kymjs.kjframe.http.HttpParams;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.ui.ViewInject;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -58,6 +59,8 @@ public class SearchFragment extends SimpleBackFragment implements TextWatcher
 	private ListView mLvSearchHistory;
 
 	private SearchAutoAdapter mSearchAutoAdapter;
+	
+//	private ProgressDialog mDialog;
 
 	@ Override
 	protected View inflaterView( LayoutInflater layoutInflater,
@@ -76,6 +79,13 @@ public class SearchFragment extends SimpleBackFragment implements TextWatcher
 		findViewById();
 		// 初始化EditText的监听器
 		initTextChangedListener();
+		
+		/*mDialog =  ViewInject.getprogress( outsideAty,
+				"请稍候...", false );
+		if (mDialog.isShowing())
+		{
+			mDialog.dismiss();
+		}*/
 	}
 
 	private void findViewById()
@@ -159,10 +169,12 @@ public class SearchFragment extends SimpleBackFragment implements TextWatcher
 				{
 					e.printStackTrace();
 				}
+				
+//				mDialog.show();
 				// 搜索
 				getSearchResultFromServer( WEB_PATH + mSearchWord, kjh, this );
-				// SimpleBackActivity.postShowWith(outsideAty,
-				// FragmentPages.SearchResult_Page);
+//				mDialog.dismiss();
+				
 				break;
 			case R.id.iv_delete_text :
 				mEitSearch.setText( "" );

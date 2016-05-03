@@ -197,10 +197,10 @@ public class ArticleListFragment extends SimpleBackFragment
 			}
 		} );
 
-		if ( YearMonthWidget.DIALOG.isShowing() )
+		/*if ( YearMonthWidget.DIALOG.isShowing() )
 		{
 			YearMonthWidget.DIALOG.dismiss();
-		}
+		}*/
 	}
 
 	/**

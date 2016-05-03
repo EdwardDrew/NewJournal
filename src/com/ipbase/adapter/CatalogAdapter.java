@@ -22,8 +22,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * @Description：CatalogAdapter
+ * @author xianhua
+ * @date 2016年4月26日上午11:50:10
+ */
 public class CatalogAdapter extends BaseAdapter
 {
+	private static final String TAG = "CatalogAdapter";
+	
 	final static public int NOCOLLECTED = 0;
 	final static public int HASCOLLECTED = 1;
 
@@ -311,7 +318,8 @@ public class CatalogAdapter extends BaseAdapter
 		private String digest;
 		private String article_id;
 		private String collect_id;
-
+		private String journal_id;
+		
 		public CatalogItem( String title, String author, String digest,
 				String article_id )
 		{
@@ -320,6 +328,17 @@ public class CatalogAdapter extends BaseAdapter
 			this.digest = digest;
 			this.article_id = article_id;
 			this.collect_id = "";
+		}
+		
+		public CatalogItem(String title, String author, String digest,
+				String article_id, String journal_id)
+		{
+			this.title = title;
+			this.author = author;
+			this.digest = digest;
+			this.article_id = article_id;
+			this.collect_id = "";
+			this.journal_id = journal_id;
 		}
 
 		public String getCollect_id()
@@ -370,6 +389,16 @@ public class CatalogAdapter extends BaseAdapter
 		public void setArticle_id( String article_id )
 		{
 			this.article_id = article_id;
+		}
+
+		public String getJournal_id()
+		{
+			return journal_id;
+		}
+
+		public void setJournal_id(String journal_id)
+		{
+			this.journal_id = journal_id;
 		}
 	};
 };

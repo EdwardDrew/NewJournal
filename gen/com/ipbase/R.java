@@ -48,46 +48,6 @@ public final class R {
         public static final int smssdk_country_group_z=0x7f0a0019;
     }
     public static final class attr {
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int aspectRatioX=0x7f010015;
-        /** <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int aspectRatioY=0x7f010016;
-        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int fixAspectRatio=0x7f010014;
-        /** <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>on</code></td><td>2</td><td></td></tr>
-<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
-<tr><td><code>off</code></td><td>0</td><td></td></tr>
-</table>
-         */
-        public static final int guidelines=0x7f010013;
-        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-         */
-        public static final int imageResource=0x7f010017;
         /**  BELOW HERE ARE DEPRECEATED. DO NOT USE. 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -224,26 +184,25 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ptrSubHeaderTextAppearance=0x7f01000b;
     }
     public static final class color {
-        public static final int actionsheet_blue=0x7f0b001d;
-        public static final int actionsheet_gray=0x7f0b001c;
-        public static final int actionsheet_red=0x7f0b001e;
-        public static final int back=0x7f0b000a;
-        public static final int black_translucent=0x7f0b0009;
-        public static final int brown_text=0x7f0b001f;
-        public static final int divider=0x7f0b0010;
-        public static final int gold=0x7f0b0013;
-        public static final int gray=0x7f0b0014;
-        public static final int gray2=0x7f0b0015;
-        public static final int gray3=0x7f0b0016;
-        public static final int gray4=0x7f0b0017;
-        public static final int gray5=0x7f0b0018;
-        public static final int gray6=0x7f0b0019;
-        public static final int gray7=0x7f0b001a;
-        public static final int gray8=0x7f0b001b;
-        public static final int layout_info=0x7f0b000b;
-        public static final int layout_left_menu=0x7f0b000c;
-        public static final int lv_search_result_bg=0x7f0b000f;
-        public static final int search_edit=0x7f0b000e;
+        public static final int actionsheet_blue=0x7f0b001c;
+        public static final int actionsheet_gray=0x7f0b001b;
+        public static final int actionsheet_red=0x7f0b001d;
+        public static final int back=0x7f0b0009;
+        public static final int brown_text=0x7f0b001e;
+        public static final int divider=0x7f0b000f;
+        public static final int gold=0x7f0b0012;
+        public static final int gray=0x7f0b0013;
+        public static final int gray2=0x7f0b0014;
+        public static final int gray3=0x7f0b0015;
+        public static final int gray4=0x7f0b0016;
+        public static final int gray5=0x7f0b0017;
+        public static final int gray6=0x7f0b0018;
+        public static final int gray7=0x7f0b0019;
+        public static final int gray8=0x7f0b001a;
+        public static final int layout_info=0x7f0b000a;
+        public static final int layout_left_menu=0x7f0b000b;
+        public static final int lv_search_result_bg=0x7f0b000e;
+        public static final int search_edit=0x7f0b000d;
         public static final int smssdk_black=0x7f0b0007;
         public static final int smssdk_gray=0x7f0b0008;
         public static final int smssdk_gray_press=0x7f0b0001;
@@ -253,9 +212,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int smssdk_lv_tv_color=0x7f0b0003;
         public static final int smssdk_transparent=0x7f0b0002;
         public static final int smssdk_white=0x7f0b0000;
-        public static final int white=0x7f0b000d;
-        public static final int yellow=0x7f0b0011;
-        public static final int yellow2=0x7f0b0012;
+        public static final int white=0x7f0b000c;
+        public static final int yellow=0x7f0b0010;
+        public static final int yellow2=0x7f0b0011;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -450,215 +409,212 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int yes=0x7f02009e;
     }
     public static final class id {
-        public static final int Cancel_button=0x7f0700b4;
-        public static final int CropOverlayView=0x7f070032;
-        public static final int ImageView_image=0x7f070031;
-        public static final int OK_button=0x7f0700b3;
-        public static final int action_settings=0x7f0700d0;
-        public static final int anser_pic_container=0x7f070015;
-        public static final int bmob_update_content=0x7f070029;
-        public static final int bmob_update_id_cancel=0x7f07002c;
-        public static final int bmob_update_id_check=0x7f07002a;
-        public static final int bmob_update_id_close=0x7f070028;
-        public static final int bmob_update_id_ignore=0x7f07002d;
-        public static final int bmob_update_id_ok=0x7f07002b;
-        public static final int bmob_update_wifi_indicator=0x7f070027;
+        public static final int Cancel_button=0x7f0700b1;
+        public static final int CropOverlayView=0x7f07002f;
+        public static final int ImageView_image=0x7f07002e;
+        public static final int OK_button=0x7f0700b0;
+        public static final int action_settings=0x7f0700cd;
+        public static final int anser_pic_container=0x7f070012;
+        public static final int bmob_update_content=0x7f070026;
+        public static final int bmob_update_id_cancel=0x7f070029;
+        public static final int bmob_update_id_check=0x7f070027;
+        public static final int bmob_update_id_close=0x7f070025;
+        public static final int bmob_update_id_ignore=0x7f07002a;
+        public static final int bmob_update_id_ok=0x7f070028;
+        public static final int bmob_update_wifi_indicator=0x7f070024;
         public static final int both=0x7f070003;
-        public static final int btn_back=0x7f070040;
-        public static final int btn_backtoread=0x7f070047;
-        public static final int btn_feedback=0x7f070053;
-        public static final int btn_look_other_comment=0x7f070030;
-        public static final int btn_no=0x7f070046;
-        public static final int btn_notice_dialog_cancel=0x7f070068;
-        public static final int btn_notice_dialog_close=0x7f070065;
-        public static final int btn_notice_dialog_ok=0x7f070067;
-        public static final int btn_post_office=0x7f07009b;
-        public static final int btn_submit_comments=0x7f0700ac;
-        public static final int btn_upload_fee_pic=0x7f07009a;
-        public static final int btn_wechat_pay=0x7f07009c;
-        public static final int btn_write_comment=0x7f07002f;
-        public static final int btn_yes=0x7f070045;
-        public static final int change_pwd_btn_commit_change=0x7f07004d;
-        public static final int change_pwd_et_newpassword=0x7f07004b;
-        public static final int change_pwd_et_original_password=0x7f07004a;
-        public static final int change_pwd_et_renewpassword=0x7f07004c;
-        public static final int chb_huli=0x7f07003e;
-        public static final int chb_linchuang=0x7f07003a;
-        public static final int chb_mingyi=0x7f070039;
-        public static final int chb_search_all=0x7f070037;
-        public static final int chb_shiyan=0x7f07003c;
-        public static final int chb_silu=0x7f070038;
-        public static final int chb_upload_pic1=0x7f0700a2;
-        public static final int chb_upload_pic2=0x7f0700a4;
-        public static final int chb_wenxian=0x7f07003d;
-        public static final int chb_yian=0x7f07003f;
-        public static final int chb_zhenjiu=0x7f07003b;
-        public static final int clean_history_layout=0x7f070081;
-        public static final int colorlayout=0x7f0700cd;
+        public static final int btn_back=0x7f07003d;
+        public static final int btn_backtoread=0x7f070044;
+        public static final int btn_feedback=0x7f070050;
+        public static final int btn_look_other_comment=0x7f07002d;
+        public static final int btn_no=0x7f070043;
+        public static final int btn_notice_dialog_cancel=0x7f070065;
+        public static final int btn_notice_dialog_close=0x7f070062;
+        public static final int btn_notice_dialog_ok=0x7f070064;
+        public static final int btn_post_office=0x7f070098;
+        public static final int btn_submit_comments=0x7f0700a9;
+        public static final int btn_upload_fee_pic=0x7f070097;
+        public static final int btn_wechat_pay=0x7f070099;
+        public static final int btn_write_comment=0x7f07002c;
+        public static final int btn_yes=0x7f070042;
+        public static final int change_pwd_btn_commit_change=0x7f07004a;
+        public static final int change_pwd_et_newpassword=0x7f070048;
+        public static final int change_pwd_et_original_password=0x7f070047;
+        public static final int change_pwd_et_renewpassword=0x7f070049;
+        public static final int chb_huli=0x7f07003b;
+        public static final int chb_linchuang=0x7f070037;
+        public static final int chb_mingyi=0x7f070036;
+        public static final int chb_search_all=0x7f070034;
+        public static final int chb_shiyan=0x7f070039;
+        public static final int chb_silu=0x7f070035;
+        public static final int chb_upload_pic1=0x7f07009f;
+        public static final int chb_upload_pic2=0x7f0700a1;
+        public static final int chb_wenxian=0x7f07003a;
+        public static final int chb_yian=0x7f07003c;
+        public static final int chb_zhenjiu=0x7f070038;
+        public static final int clean_history_layout=0x7f07007e;
+        public static final int colorlayout=0x7f0700ca;
         public static final int disabled=0x7f070004;
-        public static final int ed_write_comment=0x7f0700ab;
-        public static final int et_feedback=0x7f070052;
-        public static final int et_search=0x7f070021;
-        public static final int file_listview=0x7f07009d;
-        public static final int find_password_btn_next=0x7f07005a;
-        public static final int find_password_btn_verification=0x7f070059;
-        public static final int find_password_et_phone=0x7f070057;
-        public static final int find_password_et_verification=0x7f070058;
-        public static final int find_pwd_btn_commit=0x7f070056;
-        public static final int find_pwd_et_password=0x7f070054;
-        public static final int find_pwd_et_repassword=0x7f070055;
-        public static final int fl_inner=0x7f0700b5;
+        public static final int ed_write_comment=0x7f0700a8;
+        public static final int et_feedback=0x7f07004f;
+        public static final int et_search=0x7f07001e;
+        public static final int file_listview=0x7f07009a;
+        public static final int find_password_btn_next=0x7f070057;
+        public static final int find_password_btn_verification=0x7f070056;
+        public static final int find_password_et_phone=0x7f070054;
+        public static final int find_password_et_verification=0x7f070055;
+        public static final int find_pwd_btn_commit=0x7f070053;
+        public static final int find_pwd_et_password=0x7f070051;
+        public static final int find_pwd_et_repassword=0x7f070052;
+        public static final int fl_inner=0x7f0700b2;
         public static final int flip=0x7f07000a;
         public static final int gridview=0x7f070000;
-        public static final int icon_big=0x7f070079;
-        public static final int image_icon=0x7f0700c2;
-        public static final int iv_background=0x7f0700bb;
-        public static final int iv_collect=0x7f070051;
-        public static final int iv_delete_history_item=0x7f070083;
-        public static final int iv_delete_text=0x7f070022;
-        public static final int iv_icon=0x7f0700c5;
-        public static final int iv_pinglun=0x7f07008e;
-        public static final int iv_point=0x7f070094;
-        public static final int iv_point2=0x7f070096;
-        public static final int iv_point3=0x7f070098;
-        public static final int iv_residemenu_back=0x7f0700c7;
-        public static final int iv_search=0x7f070023;
-        public static final int iv_shadow=0x7f0700bc;
-        public static final int iv_state1=0x7f070093;
-        public static final int iv_state2=0x7f070095;
-        public static final int iv_state3=0x7f070097;
-        public static final int iv_state4=0x7f070099;
-        public static final int iv_take_pictures=0x7f0700a0;
-        public static final int iv_take_pictures1=0x7f0700a1;
-        public static final int iv_take_pictures3=0x7f0700a3;
-        public static final int iv_take_pictures4=0x7f0700a5;
-        public static final int iv_take_pictures5=0x7f0700a6;
-        public static final int iv_take_pictures6=0x7f0700a7;
-        public static final int iv_tijiao=0x7f070092;
-        public static final int iv_touxiang=0x7f07006d;
-        public static final int iv_year=0x7f0700cf;
-        public static final int lLayout_content=0x7f0700cb;
-        public static final int layout_info=0x7f0700be;
-        public static final int layout_left_menu=0x7f0700bf;
-        public static final int layout_main=0x7f07001a;
-        public static final int layout_right_menu=0x7f0700c1;
-        public static final int layout_titlebar=0x7f0700c6;
-        public static final int layout_top=0x7f070017;
-        public static final int ll_icon=0x7f070078;
-        public static final int ll_jindutiao=0x7f0700a9;
-        public static final int login_btn=0x7f07005d;
-        public static final int login_et_password=0x7f07005c;
-        public static final int login_et_phone=0x7f07005b;
-        public static final int login_img_weixin=0x7f07005f;
-        public static final int login_tv_forget_pwd=0x7f070061;
-        public static final int login_tv_register=0x7f070060;
-        public static final int login_tv_weixin=0x7f07005e;
-        public static final int lv_buyed=0x7f070048;
-        public static final int lv_collected=0x7f07004e;
-        public static final int lv_contents=0x7f07004f;
-        public static final int lv_notice=0x7f070063;
-        public static final int lv_pinglun=0x7f070091;
-        public static final int lv_qi=0x7f07007a;
-        public static final int lv_search_history=0x7f070085;
-        public static final int lv_search_result=0x7f070086;
-        public static final int lv_yitougaojian=0x7f0700ad;
-        public static final int main_content=0x7f07001e;
+        public static final int icon_big=0x7f070076;
+        public static final int image_icon=0x7f0700bf;
+        public static final int iv_background=0x7f0700b8;
+        public static final int iv_collect=0x7f07004e;
+        public static final int iv_delete_history_item=0x7f070080;
+        public static final int iv_delete_text=0x7f07001f;
+        public static final int iv_icon=0x7f0700c2;
+        public static final int iv_pinglun=0x7f07008b;
+        public static final int iv_point=0x7f070091;
+        public static final int iv_point2=0x7f070093;
+        public static final int iv_point3=0x7f070095;
+        public static final int iv_residemenu_back=0x7f0700c4;
+        public static final int iv_search=0x7f070020;
+        public static final int iv_shadow=0x7f0700b9;
+        public static final int iv_state1=0x7f070090;
+        public static final int iv_state2=0x7f070092;
+        public static final int iv_state3=0x7f070094;
+        public static final int iv_state4=0x7f070096;
+        public static final int iv_take_pictures=0x7f07009d;
+        public static final int iv_take_pictures1=0x7f07009e;
+        public static final int iv_take_pictures3=0x7f0700a0;
+        public static final int iv_take_pictures4=0x7f0700a2;
+        public static final int iv_take_pictures5=0x7f0700a3;
+        public static final int iv_take_pictures6=0x7f0700a4;
+        public static final int iv_tijiao=0x7f07008f;
+        public static final int iv_touxiang=0x7f07006a;
+        public static final int iv_year=0x7f0700cc;
+        public static final int lLayout_content=0x7f0700c8;
+        public static final int layout_info=0x7f0700bb;
+        public static final int layout_left_menu=0x7f0700bc;
+        public static final int layout_main=0x7f070017;
+        public static final int layout_right_menu=0x7f0700be;
+        public static final int layout_titlebar=0x7f0700c3;
+        public static final int layout_top=0x7f070014;
+        public static final int ll_icon=0x7f070075;
+        public static final int ll_jindutiao=0x7f0700a6;
+        public static final int login_btn=0x7f07005a;
+        public static final int login_et_password=0x7f070059;
+        public static final int login_et_phone=0x7f070058;
+        public static final int login_img_weixin=0x7f07005c;
+        public static final int login_tv_forget_pwd=0x7f07005e;
+        public static final int login_tv_register=0x7f07005d;
+        public static final int login_tv_weixin=0x7f07005b;
+        public static final int lv_buyed=0x7f070045;
+        public static final int lv_collected=0x7f07004b;
+        public static final int lv_contents=0x7f07004c;
+        public static final int lv_notice=0x7f070060;
+        public static final int lv_pinglun=0x7f07008e;
+        public static final int lv_qi=0x7f070077;
+        public static final int lv_search_history=0x7f070082;
+        public static final int lv_search_result=0x7f070083;
+        public static final int lv_yitougaojian=0x7f0700aa;
+        public static final int main_content=0x7f07001b;
         public static final int manualOnly=0x7f070005;
-        public static final int nickName_button=0x7f070035;
-        public static final int nickName_edit=0x7f070034;
-        public static final int off=0x7f07000c;
-        public static final int on=0x7f07000d;
-        public static final int onTouch=0x7f07000e;
-        public static final int progress=0x7f0700aa;
+        public static final int nickName_button=0x7f070032;
+        public static final int nickName_edit=0x7f070031;
+        public static final int progress=0x7f0700a7;
         public static final int pullDownFromTop=0x7f070006;
         public static final int pullFromEnd=0x7f070007;
         public static final int pullFromStart=0x7f070008;
         public static final int pullUpFromBottom=0x7f070009;
-        public static final int pull_refresh_list=0x7f070062;
-        public static final int pull_to_refresh_image=0x7f0700b6;
-        public static final int pull_to_refresh_progress=0x7f0700b7;
-        public static final int pull_to_refresh_sub_text=0x7f0700b9;
-        public static final int pull_to_refresh_text=0x7f0700b8;
-        public static final int qiListView=0x7f07001c;
-        public static final int question_img=0x7f070016;
-        public static final int question_photo_view_nav_btn_back=0x7f070010;
-        public static final int question_photo_view_nav_submit=0x7f070011;
-        public static final int question_photo_view_rotate_container=0x7f070012;
-        public static final int question_photo_view_turn_left_btn=0x7f070013;
-        public static final int question_photo_view_turn_right_btn=0x7f070014;
-        public static final int question_title_bar_container=0x7f07000f;
-        public static final int reg_btn=0x7f070080;
-        public static final int reg_btn_verification=0x7f07007d;
-        public static final int reg_et_password=0x7f07007e;
-        public static final int reg_et_phone=0x7f07007b;
-        public static final int reg_et_repassword=0x7f07007f;
-        public static final int reg_et_verification=0x7f07007c;
-        public static final int reply=0x7f07002e;
-        public static final int rl_WeChatOrAlipay=0x7f070076;
-        public static final int rl_account=0x7f07006e;
-        public static final int rl_bind_mail=0x7f070074;
-        public static final int rl_bind_phone=0x7f070072;
-        public static final int rl_left_menu=0x7f0700bd;
-        public static final int rl_nickname=0x7f070070;
-        public static final int rl_right_menu=0x7f0700c0;
-        public static final int rl_search_title=0x7f07001f;
-        public static final int rl_titlebar=0x7f070024;
-        public static final int rl_touxiang=0x7f07006c;
+        public static final int pull_refresh_list=0x7f07005f;
+        public static final int pull_to_refresh_image=0x7f0700b3;
+        public static final int pull_to_refresh_progress=0x7f0700b4;
+        public static final int pull_to_refresh_sub_text=0x7f0700b6;
+        public static final int pull_to_refresh_text=0x7f0700b5;
+        public static final int qiListView=0x7f070019;
+        public static final int question_img=0x7f070013;
+        public static final int question_photo_view_nav_btn_back=0x7f07000d;
+        public static final int question_photo_view_nav_submit=0x7f07000e;
+        public static final int question_photo_view_rotate_container=0x7f07000f;
+        public static final int question_photo_view_turn_left_btn=0x7f070010;
+        public static final int question_photo_view_turn_right_btn=0x7f070011;
+        public static final int question_title_bar_container=0x7f07000c;
+        public static final int reg_btn=0x7f07007d;
+        public static final int reg_btn_verification=0x7f07007a;
+        public static final int reg_et_password=0x7f07007b;
+        public static final int reg_et_phone=0x7f070078;
+        public static final int reg_et_repassword=0x7f07007c;
+        public static final int reg_et_verification=0x7f070079;
+        public static final int reply=0x7f07002b;
+        public static final int rl_WeChatOrAlipay=0x7f070073;
+        public static final int rl_account=0x7f07006b;
+        public static final int rl_bind_mail=0x7f070071;
+        public static final int rl_bind_phone=0x7f07006f;
+        public static final int rl_left_menu=0x7f0700ba;
+        public static final int rl_nickname=0x7f07006d;
+        public static final int rl_right_menu=0x7f0700bd;
+        public static final int rl_search_title=0x7f07001c;
+        public static final int rl_titlebar=0x7f070021;
+        public static final int rl_touxiang=0x7f070069;
         public static final int rotate=0x7f07000b;
-        public static final int sLayout_content=0x7f0700ca;
+        public static final int sLayout_content=0x7f0700c7;
         public static final int scrollview=0x7f070002;
-        public static final int textView=0x7f07001d;
-        public static final int tips_edit=0x7f070033;
-        public static final int tips_edit2=0x7f0700b2;
-        public static final int title_bar_left_menu=0x7f070018;
-        public static final int title_bar_right_menu=0x7f070019;
-        public static final int titlebar_img_back=0x7f070025;
-        public static final int titlebar_img_back_search=0x7f070020;
-        public static final int titlebar_text_title=0x7f070026;
-        public static final int tv_WeChatOrAlipay=0x7f070077;
-        public static final int tv_account=0x7f07006f;
-        public static final int tv_back_page=0x7f070090;
-        public static final int tv_bind_mail=0x7f070075;
-        public static final int tv_bind_phone=0x7f070073;
-        public static final int tv_clean_search_history=0x7f070082;
-        public static final int tv_comfirm_buy=0x7f070044;
-        public static final int tv_content_title=0x7f070050;
-        public static final int tv_contributed_digest=0x7f0700af;
-        public static final int tv_contributed_title=0x7f0700ae;
-        public static final int tv_digest=0x7f07008d;
-        public static final int tv_history_item_content=0x7f070084;
-        public static final int tv_item=0x7f070036;
-        public static final int tv_latest_version=0x7f07009f;
-        public static final int tv_next_page=0x7f07008f;
-        public static final int tv_nickname=0x7f070071;
-        public static final int tv_notice_content=0x7f07006b;
-        public static final int tv_notice_dialog_content=0x7f070066;
-        public static final int tv_notice_dialog_title=0x7f070064;
-        public static final int tv_notice_time=0x7f07006a;
-        public static final int tv_notice_title=0x7f070069;
-        public static final int tv_pay_fee=0x7f0700b1;
-        public static final int tv_price=0x7f070042;
-        public static final int tv_price_tag=0x7f070041;
-        public static final int tv_qi=0x7f0700ba;
-        public static final int tv_qi_bian_num=0x7f070049;
-        public static final int tv_residemenu_title=0x7f0700c8;
-        public static final int tv_search_result_article_author=0x7f070088;
-        public static final int tv_search_result_article_publish_time=0x7f070089;
-        public static final int tv_search_result_digest=0x7f07008a;
-        public static final int tv_search_result_title=0x7f070087;
-        public static final int tv_state=0x7f0700b0;
-        public static final int tv_title=0x7f07008b;
-        public static final int tv_userinfo=0x7f0700c4;
-        public static final int tv_username=0x7f0700c3;
-        public static final int tv_version=0x7f07009e;
-        public static final int tv_writer=0x7f07008c;
-        public static final int tv_year=0x7f0700ce;
-        public static final int tv_yuan=0x7f070043;
-        public static final int txt_cancel=0x7f0700cc;
-        public static final int txt_title=0x7f0700c9;
-        public static final int webView=0x7f0700a8;
+        public static final int textView=0x7f07001a;
+        public static final int tips_edit=0x7f070030;
+        public static final int tips_edit2=0x7f0700af;
+        public static final int title_bar_left_menu=0x7f070015;
+        public static final int title_bar_right_menu=0x7f070016;
+        public static final int titlebar_img_back=0x7f070022;
+        public static final int titlebar_img_back_search=0x7f07001d;
+        public static final int titlebar_text_title=0x7f070023;
+        public static final int tv_WeChatOrAlipay=0x7f070074;
+        public static final int tv_account=0x7f07006c;
+        public static final int tv_back_page=0x7f07008d;
+        public static final int tv_bind_mail=0x7f070072;
+        public static final int tv_bind_phone=0x7f070070;
+        public static final int tv_clean_search_history=0x7f07007f;
+        public static final int tv_comfirm_buy=0x7f070041;
+        public static final int tv_content_title=0x7f07004d;
+        public static final int tv_contributed_digest=0x7f0700ac;
+        public static final int tv_contributed_title=0x7f0700ab;
+        public static final int tv_digest=0x7f07008a;
+        public static final int tv_history_item_content=0x7f070081;
+        public static final int tv_item=0x7f070033;
+        public static final int tv_latest_version=0x7f07009c;
+        public static final int tv_next_page=0x7f07008c;
+        public static final int tv_nickname=0x7f07006e;
+        public static final int tv_notice_content=0x7f070068;
+        public static final int tv_notice_dialog_content=0x7f070063;
+        public static final int tv_notice_dialog_title=0x7f070061;
+        public static final int tv_notice_time=0x7f070067;
+        public static final int tv_notice_title=0x7f070066;
+        public static final int tv_pay_fee=0x7f0700ae;
+        public static final int tv_price=0x7f07003f;
+        public static final int tv_price_tag=0x7f07003e;
+        public static final int tv_qi=0x7f0700b7;
+        public static final int tv_qi_bian_num=0x7f070046;
+        public static final int tv_residemenu_title=0x7f0700c5;
+        public static final int tv_search_result_article_author=0x7f070085;
+        public static final int tv_search_result_article_publish_time=0x7f070086;
+        public static final int tv_search_result_digest=0x7f070087;
+        public static final int tv_search_result_title=0x7f070084;
+        public static final int tv_state=0x7f0700ad;
+        public static final int tv_title=0x7f070088;
+        public static final int tv_userinfo=0x7f0700c1;
+        public static final int tv_username=0x7f0700c0;
+        public static final int tv_version=0x7f07009b;
+        public static final int tv_writer=0x7f070089;
+        public static final int tv_year=0x7f0700cb;
+        public static final int tv_yuan=0x7f070040;
+        public static final int txt_cancel=0x7f0700c9;
+        public static final int txt_title=0x7f0700c6;
+        public static final int webView=0x7f0700a5;
         public static final int webview=0x7f070001;
-        public static final int yearListView=0x7f07001b;
+        public static final int yearListView=0x7f070018;
     }
     public static final class layout {
         public static final int activity_cropper=0x7f030000;
@@ -972,26 +928,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    
- API 11 theme customizations can go here. 
-
-        Base application theme for API 14+. This theme completely replaces
-        AppBaseTheme from BOTH res/values/styles.xml and
-        res/values-v11/styles.xml on API 14+ devices.
-    
- API 14 theme customizations can go here. 
-
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 
 
 
@@ -1023,8 +959,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
  All customizations that are NOT specific to a particular API-level can go here. 
  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
- Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f090001;
         /**  dialog 
@@ -1036,98 +970,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fragment_text=0x7f090003;
     }
     public static final class styleable {
-        /** Attributes that can be used with a CropImageView.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CropImageView_aspectRatioX com.ipbase:aspectRatioX}</code></td><td></td></tr>
-           <tr><td><code>{@link #CropImageView_aspectRatioY com.ipbase:aspectRatioY}</code></td><td></td></tr>
-           <tr><td><code>{@link #CropImageView_fixAspectRatio com.ipbase:fixAspectRatio}</code></td><td></td></tr>
-           <tr><td><code>{@link #CropImageView_guidelines com.ipbase:guidelines}</code></td><td></td></tr>
-           <tr><td><code>{@link #CropImageView_imageResource com.ipbase:imageResource}</code></td><td></td></tr>
-           </table>
-           @see #CropImageView_aspectRatioX
-           @see #CropImageView_aspectRatioY
-           @see #CropImageView_fixAspectRatio
-           @see #CropImageView_guidelines
-           @see #CropImageView_imageResource
-         */
-        public static final int[] CropImageView = {
-            0x7f010013, 0x7f010014, 0x7f010015, 0x7f010016,
-            0x7f010017
-        };
-        /**
-          <p>This symbol is the offset where the {@link com.ipbase.R.attr#aspectRatioX}
-          attribute's value can be found in the {@link #CropImageView} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.ipbase:aspectRatioX
-        */
-        public static final int CropImageView_aspectRatioX = 2;
-        /**
-          <p>This symbol is the offset where the {@link com.ipbase.R.attr#aspectRatioY}
-          attribute's value can be found in the {@link #CropImageView} array.
-
-
-          <p>Must be an integer value, such as "<code>100</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.ipbase:aspectRatioY
-        */
-        public static final int CropImageView_aspectRatioY = 3;
-        /**
-          <p>This symbol is the offset where the {@link com.ipbase.R.attr#fixAspectRatio}
-          attribute's value can be found in the {@link #CropImageView} array.
-
-
-          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name com.ipbase:fixAspectRatio
-        */
-        public static final int CropImageView_fixAspectRatio = 1;
-        /**
-          <p>This symbol is the offset where the {@link com.ipbase.R.attr#guidelines}
-          attribute's value can be found in the {@link #CropImageView} array.
-
-
-          <p>Must be one of the following constant values.</p>
-<table>
-<colgroup align="left" />
-<colgroup align="left" />
-<colgroup align="left" />
-<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
-<tr><td><code>on</code></td><td>2</td><td></td></tr>
-<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
-<tr><td><code>off</code></td><td>0</td><td></td></tr>
-</table>
-          @attr name com.ipbase:guidelines
-        */
-        public static final int CropImageView_guidelines = 0;
-        /**
-          <p>This symbol is the offset where the {@link com.ipbase.R.attr#imageResource}
-          attribute's value can be found in the {@link #CropImageView} array.
-
-
-          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
-or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.ipbase:imageResource
-        */
-        public static final int CropImageView_imageResource = 4;
         /** Attributes that can be used with a PullToRefresh.
            <p>Includes the following attributes:</p>
            <table>
